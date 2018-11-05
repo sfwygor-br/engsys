@@ -1,0 +1,170 @@
+﻿@font-face {
+    font-family: Ubuntu;
+    src: url('./fonts/Ubuntu-L.ttf');
+}
+
+@font-face {
+    font-family: Embryonic;
+    src: url('./fonts/embryonic-world.ttf');
+}
+
+body{
+	margin: 0px auto;
+	font-family: Ubuntu;
+	background-color: #80438b;
+}
+
+header{	
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-size: 15pt;
+	position: fixed;
+	background-color: #25051f;
+	margin: 0px auto;
+}
+
+nav{
+	width: 68%;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+}
+
+section{
+	width:60%;
+	margin-top: 70px;
+	margin-right: 10%;
+	float: right;
+}
+
+aside{
+	width: 100px;
+}
+
+table{
+	margin: 0px auto;
+	clear: both;
+	font-size: 15pt;
+}
+
+.tr-even{
+	background-color: #696969;
+}
+
+.tr-odd{
+	background-color: #808080;
+}
+
+#logo{
+	width: 15%;
+	height: 50px;
+	line-height: 50px;
+	float:left;
+	font-family: Embryonic;
+	background-color: #E95420;
+}
+
+#logout{
+	width: 17%;
+	height: 50px;
+	line-height: 50px;
+	float:right;
+	background-color:#E95420;
+}
+
+.a-nav{
+	color: inherit;
+	text-decoration: none;
+}
+
+.a-nav:hover{	
+	color: inherit;
+	text-decoration: none;
+}
+
+.div-a-nav{
+	width: 140px;
+	height: 50px;
+	color: E95420;	
+	background-color: #25051f;
+	float: left;
+}
+
+.div-a-nav:hover{
+	width: 140px;
+	height: 50px;
+	color: 25051f;	
+	background-color: E95420;
+	float: left;
+}
+
+.div-a-nav-active{
+	width: 140px;
+	height: 50px;
+	color: 25051f;	
+	background-color: E95420;
+	float: left;
+}
+
+.a-nav-active{	
+	color: inherit;
+	text-decoration: none;
+}
+
+.separator{
+	height: 3px;
+	width: 100%;
+	background-color: #E95420;
+	margin-top: 50px;
+	position: fixed;
+	float:left;
+	clear: both;
+}
+
+#new-reg{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-weight: bold;
+	background-color: gray;
+	color: white;
+	float: right;
+	margin-right: 30px;
+}
+
+.green-dot{
+	width: 10px;
+	height: 10px;
+	border-radius: 100px;
+	margin-top: 20px;
+	background-color: 4CBB17;
+	margin-left: 10px;
+	float: left;
+}
+.green-dot-text{
+	float:left;
+	margin-left: 5px;
+}
+
+.field{
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px;
+	padding: 3px;
+	font-size: 20pt;
+	color: gray;
+}
+
+.button{
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px;
+	padding: 3px;
+	background-color: transparent;
+	font-size: 20pt;
+	color: gray;
+}
+
+	

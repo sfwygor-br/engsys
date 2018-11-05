@@ -1,0 +1,32 @@
+﻿.login-form{
+	width: 70%;	
+	float: left;
+	clear: both;
+	margin-left: 15%;	
+}
+
+.input-field{
+	width: 70%;
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px;
+	clear: both;
+	margin-top: 10%;
+	margin-left: 15%;
+	padding: 3px;
+	font-size: 20pt;
+	color: gray;
+}
+
+.login-button{
+	width: 70%;
+	height: 50px;
+	line-height: 50px;
+	border: solid 1px;
+	margin-top: 10%;
+	margin-left: 15%;
+	margin-bottom: 10%;
+	background-color: transparent;
+	font-size: 20pt;
+	color: gray;
+}
