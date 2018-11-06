@@ -75,7 +75,9 @@
 						$table, 
 						$action,
 						$new_line,
-						$recordset){
+						$recordset,
+						$fk,
+						$fk_v){
 		function yesno($field, $selected){
 				$x = "
 		<select name='$field' class='field'>";
@@ -132,9 +134,15 @@
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . yesno($fields_name[$pos], '0');
 					$pos = $pos + 1;					
-				}else{					
+				}else{		
+				    $aux = "";
+                    if (!empty($fk)){
+						if ($GLOBALS["fields_name"][$table][$fk] == $field){
+							$aux = " value='$fk_v' ";
+						}
+					}				
 					$form = $form.
-	"<input class='field' type='".$field_type[$pos]."' placeholder='".$placeholder[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."'>";
+	"<input class='field' type='".$field_type[$pos]."' placeholder='".$placeholder[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' $aux>";
 					if ($new_line[$pos]=="yes"){
 						$form = $form."</p>
 	<p>";	

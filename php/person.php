@@ -23,6 +23,7 @@
 											 "person", 
 											 $x,
 											 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
+											 null,
 											 null
 											);
 		}else if ($action == 'UPDATE'){
@@ -39,10 +40,12 @@
 												 "person", 
 												 $x,
 												 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
-												 $rs
+												 $rs,
+												 null,
+												 null
 												);
 				
-				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=PHONEINSERT\"'>Novo</div>";
+				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=PHONEINSERT&idperson=".$_GET['idperson']."\"'>Novo</div>";
 				$sql = "select * from phone where idperson = ".$_GET['idperson'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
 				if ($rs == True){
@@ -55,7 +58,7 @@
 													);
 				};
 				
-				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=ADRESSINSERT\"'>Novo</div>";
+				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=ADRESSINSERT&idperson=".$_GET['idperson']."\"'>Novo</div>";
 				$sql = "select * from adress where idperson = ".$_GET['idperson'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
 				if ($rs == True){
@@ -80,7 +83,9 @@
 										 "phone", 
 										 $x,
 										 array("no", "no", "no"),
-										 null
+										 null,
+										 1,
+										 $_GET["idperson"]
 										);		
 	}else if ($action == 'PHONEUPDATE'){
 		$page = 'phone';
@@ -95,20 +100,24 @@
 										 "phone", 
 										 $x,
 										 array("no", "no", "no"),
-										 $rs
+										 $rs,
+										 null,
+										 null
 										);	
 	}else if ($action == 'ADRESSINSERT'){
 		$page = 'adress';
 		$x = 'insert';
 		$section = $section . build_form($GLOBALS['fields_name']['adress'],
-		                                 array("Código", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
+		                                 array("Código", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
 										 array("0", "0", "64", "10", "50", "40", "12", "4"), 
-										 array("hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
+										 array("hidden", "hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
 										 "./data_process.php", 
 										 "adress", 
 										 $x,
-										 array("no", "no", "no", "no", "no", "no", "no"),
-										 null
+										 array("no", "no", "no", "no", "no", "no", "no", "no"),
+										 null,
+										 1,
+										 $_GET["idperson"]
 										);		
 	}else if ($action == 'ADRESSUPDATE'){
 		$page = 'adress';
@@ -116,14 +125,16 @@
 		$sql = "select * from adress where idperson = ".$_GET['idperson'].$_GET['sql_macro'];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		$section = $section . build_form($GLOBALS['fields_name']['adress'],
-		                                 array("Código", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
+		                                 array("Código", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
 										 array("0", "0", "64", "10", "50", "40", "12", "4"), 
-										 array("hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
+										 array("hidden", "hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
 										 "./data_process.php", 
 										 "adress", 
 										 $x,
-										 array("no", "no", "no", "no", "no", "no", "no"),
-										 $rs
+										 array("no", "no", "no", "no", "no", "no", "no", "no"),
+										 $rs,
+										 "idperson",
+										 $_GET["idperson"]
 										);	
 	}else{
 		$sql = "select idperson,
