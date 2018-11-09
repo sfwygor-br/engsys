@@ -79,9 +79,9 @@
 		foreach($GLOBALS['fields_name'][$_POST['page']] as $field){
 			if ($GLOBALS['is_key'][$_POST['page']][$pos] == "yes"){
 				$sql = $sql . $field . " = " . $_POST[$field];
-				if ($GLOBALS['is_key'][$_POST['page']][$pos + 1] == "yes"){
-					$sql = $sql . " and ";
-				}
+			}
+			if ($GLOBALS['is_key'][$_POST['page']][$pos + 1] == "yes"){
+				$sql = $sql . " and ";
 			}
 			$pos = $pos + 1;
 		}
@@ -99,9 +99,9 @@
 		foreach($GLOBALS['fields_name'][$_POST['page']] as $field){
 			if ($GLOBALS['is_key'][$_POST['page']][$pos] == "yes"){
 				$sql = $sql . $field . " = " . $_POST[$field];
-				if ($GLOBALS['is_key'][$_POST['page']][$pos + 1] == "yes"){
-					$sql = $sql . " and ";
-				}
+			}
+			if ($GLOBALS['is_key'][$_POST['page']][$pos + 1] == "yes"){
+				$sql = $sql . " and ";
 			}
 			$pos = $pos + 1;
 		}

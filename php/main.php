@@ -2,6 +2,7 @@
 	function load_base_page($page_title, $page, $section){
 		ob_start();
 		ob_end_clean();
+		session_start();
 		#$page = $v;
 		$nav  = "";
 	    #echo "<script language='JavaScript'>/*<document.location='main.php?r=1&width='+screen.width+'&Height='+screen.height*/ alert(window.innerWidth);</script>";
@@ -105,6 +106,15 @@
 						});		
 					});
 				};
+				
+				i = document.getElementById('logout');
+				if (i != null){
+					document.getElementById ('logout').addEventListener('click', function(){
+						if (confirm('Deseja encerrar a sessão?')){
+							location = './_session_.php?logout=TRUE';
+						}
+					});
+				};
 			});
 		</script>
 	</head>
@@ -115,7 +125,7 @@
 			<nav>
 			$nav
 			</nav>
-			<div id='logout'><div class='green-dot-text'>CSWYGORSOUZA</div><div class='green-dot'></div></div>
+			<div id='logout'><div class='green-dot-text'>" . $_SESSION["username"] . "</div><div class='green-dot'></div></div>
 		</header>
 		<div class='separator'></div>
 		<aside>
@@ -125,7 +135,16 @@
 		</section>
 	</body>
 </html>";
-		echo $screen;		
-		return 0;
+		
+		if (isset($_SESSION["iduser_integ"])){
+			echo $screen;
+			return 0;
+		}else{
+			echo"<script> 
+			         alert('A sua sessão expirou');
+					 location = '../index.php?SessionExpiredTrue';
+			     </script>";
+			return 1;
+		}
 	}
 ?>

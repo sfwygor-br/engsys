@@ -1,5 +1,5 @@
 ﻿<?php
-	$GLOBALS['fields_name']['user']           	= array("idusuario", "username", "password", "email", "insert_date", "status", "iduser_integ");
+	$GLOBALS['fields_name']['user']           	= array("iduser", "username", "password", "email", "insert_date", "status", "iduser_integ");
 	$GLOBALS['fields_type']['user']           	= array("number", "varchar", "varchar", "varchar", "varchar", "number", "number");
 	
 	$GLOBALS['fields_name']['person'] 			= array("idperson", "name", "fantasy_name", "type", "document", "email", "provider", "insert_date", "iduser_integ");

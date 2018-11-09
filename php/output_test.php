@@ -1,3 +1,3 @@
 ﻿<?php
-	echo"%_GET['param']";
+	echo$_GET['param'];
 ?>
