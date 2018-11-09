@@ -1,27 +1,40 @@
 ﻿<?php
-	@$user     = $_POST["username"];
-	@$password = $_POST["password"];
-	require("./php/connection.php");
-	require("./php/security.php");
-	$display = True;
-	connect();
-	
-	if((!empty($user)) and (!empty($password))){
-		#echo"<script>alert($user+$password)</script>";
-		$sql = "select * from user where username = '$user' and password = '$password'";
-		$rs  = mysqli_query($GLOBALS['conn'], $sql);
-		if ($rs == True){			
-			if (mysqli_num_rows($rs) == 1) {
-				$res = mysqli_fetch_assoc($rs);			
-				disconnect();				
-				header("Location: ./php/dashboard.php");
-				exit();
-			}else{
-				echo'usuário ou senha inválidos';
+	session_start();
+	if(isset($_SESSION["iduser_integ"])){
+		echo"<script>location='./php/dashboard.php'</script>";
+		header("Location: ./php/dashboard.php");
+	}else{
+		@$user     = $_POST["username"];
+		@$password = $_POST["password"];
+		require("./php/connection.php");
+		require("./php/security.php");
+		$display = True;
+		connect();
+		
+		$status_inactive = "";
+		if((!empty($user)) and (!empty($password))){
+			#echo"<script>alert($user+$password)</script>";
+			$sql = "select * from user where username = '$user' and password = '$password'";
+			$rs  = mysqli_query($GLOBALS['conn'], $sql);
+			if ($rs == True){			
+				if (mysqli_num_rows($rs) == 1) {
+					$res = mysqli_fetch_assoc($rs);			
+					disconnect();		
+                    if ($res["status"] == 0){
+						$_SESSION["iduser"]       = $res["iduser"];
+						$_SESSION["iduser_integ"] = $res["iduser_integ"];
+						$_SESSION["username"]     = $res["username"];
+						header("Location: ./php/dashboard.php");	
+					}else{
+						$status_inactive = "<script>alert('Usuário Inativo: Contate o administrador do sistemma')</script>";
+					}
+				}else{
+					$status_inactive = "<script>alert('Usuário ou Senha inválidos')</script>";
+				}
 			}
 		}
 	}
-?>
+    $screen = "
 <html>
 	<head>
 	
@@ -37,6 +50,9 @@
 				<input class='input-field' type='password' name='password' placeholer='Senha'>
 				<input class='login-button' type='submit' value='Login'>
 			</form>
+			$status_inactive
 		</div>
 	</body>
-</html>	
+</html>";
+    echo $screen;
+?>

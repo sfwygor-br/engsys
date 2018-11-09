@@ -1,5 +1,5 @@
 <?php
-	#error_reporting(0);
+	error_reporting(0);
 	$GLOBALS['conn'] = new mysqli('localhost', 'root', '', 'ENGSYS');
 	function connect(){	 
 		if ($GLOBALS['conn']->connect_error) {

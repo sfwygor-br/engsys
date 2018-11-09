@@ -97,6 +97,25 @@
 			return($x);
 		};
 		
+		function status($field, $selected){
+				$x = "
+		<select name='$field' class='field'>";
+			if ($selected == '0'){
+				$x = $x."
+			<option value='0' selected> Ativo </option>
+			<option value='1'> Inativo </option>
+		</select>";
+				
+			} else if ($selected == '1'){
+				$x = $x."
+			<option value='0'> Ativo </option>
+			<option value='1' selected> Inativo </option>
+		</select>";
+			}
+			
+			return($x);
+		};
+		
 		function person_type($field, $selected){
 			$x = "
 		<select name='$field' class='field'>";
@@ -131,6 +150,9 @@
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					$form = $form . yesno($fields_name[$pos], '1');
 					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="status")){
+					$form = $form . status($fields_name[$pos], '1');
+					$pos = $pos + 1;					
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . yesno($fields_name[$pos], '0');
 					$pos = $pos + 1;					
@@ -152,12 +174,16 @@
 			}
 		}else if ($action == 'update'){
 			$r = mysqli_fetch_assoc($recordset);
+			$pos = 0;
 			foreach ($fields_name as $field){
 				if ($field_type[$pos] =="person_type"){
 					$form = $form . person_type($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="status")){
+					$form = $form . status($fields_name[$pos], '1');
 					$pos = $pos + 1;					
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
@@ -176,6 +202,8 @@
 		
 		if (in_array($table, array("phone", "adress", "person"))){
 			$page_aux = "person";
+		}else{
+			$page_aux = $table;
 		}
 		
 		if ($action == "insert"){
