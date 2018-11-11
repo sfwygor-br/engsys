@@ -135,8 +135,107 @@
 			return($x);
 		}
 		
-		function billing_type(){
+		function person_filter($field, $selected, $size){
+			$x = "
+		<select name='$field' class='field' style='width: $size;'>";
+		    if (!isset($selected)){
+				$x = $x . "
+				<option value='null' selected> Selecione o Cliente </option>
+				";
+			};
 			
+			$sql = "select idperson,
+						   name
+			          from person
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
+					order by name desc";
+			connect();
+			$aux = "";
+			$rs  = mysqli_query($GLOBALS["conn"], $sql);
+		    while($r = mysqli_fetch_assoc($rs)){
+				if ($selected == $r["idperson"]){
+					$aux = "selected";
+				};
+				$x = $x . "<option value='" . $r["idperson"] . "' $aux>" . $r["name"] . "</option>";
+			}		
+            $x = $x . "
+			</select>";			
+			return($x);
+		}
+		
+		function event_filter($field, $selected, $size){
+			$x = "
+		<select name='$field' class='field' style='width: $size;'>";
+		    if (!isset($selected)){
+				$x = $x . "
+				<option value='null' selected> Selecione o Evento </option>
+				";
+			};
+			
+			$sql = "select idevent,
+						   description
+			          from event
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
+					order by description desc";
+			connect();
+			$aux = "";
+			$rs  = mysqli_query($GLOBALS["conn"], $sql);
+		    while($r = mysqli_fetch_assoc($rs)){
+				if ($selected == $r["idevent"]){
+					$aux = "selected";
+				};
+				$x = $x . "<option value='" . $r["idevent"] . "' $aux>" . $r["description"] . "</option>";
+			}		
+            $x = $x . "
+			</select>";			
+			return($x);
+		}
+		
+		function project_filter($field, $selected, $size){
+			$x = "
+		<select name='$field' class='field' style='width: $size;'>";
+		    if (!isset($selected)){
+				$x = $x . "
+				<option value='null' selected> Selecione o Projeto </option>
+				";
+			};
+			
+			$sql = "select idproject,
+						   substr(description, 0, 500) description
+			          from project
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
+					order by description desc";
+			connect();
+			$aux = "";
+			$rs  = mysqli_query($GLOBALS["conn"], $sql);
+		    while($r = mysqli_fetch_assoc($rs)){
+				if ($selected == $r["idproject"]){
+					$aux = "selected";
+				};
+				$x = $x . "<option value='" . $r["idproject"] . "' $aux>" . $r["description"] . "</option>";
+			}		
+            $x = $x . "
+			</select>";			
+			return($x);
+		}
+		
+		function billing_type($field, $selected, $size){
+			$x = "
+		<select name='$field' class='field' style='width: $size;'>";
+			if ($selected == '0'){
+				$x = $x."
+			<option value='0' selected> Entrada </option>
+			<option value='1'> Saída </option>
+		</select>";
+				
+			} else if ($selected == '1'){
+				$x = $x."
+			<option value='0'> Entrada </option>
+			<option value='1' selected> Saída </option>
+		</select>";
+			}
+			
+			return($x);
 		}
 		$form = 
 "<form method='POST' action='$form_action' id='form'>
@@ -147,6 +246,15 @@
 				if ($field_type[$pos] =="person_type"){
 					$form = $form . person_type($fields_name[$pos], '0');
 					$pos = $pos + 1;
+				}else if (($field_type[$pos] =="project_filter")){
+					$form = $form . project_filter($fields_name[$pos], null, $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="event_filter")){
+					$form = $form . event_filter($fields_name[$pos], null, $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="person_filter")){
+					$form = $form . person_filter($fields_name[$pos], null, $field_size[$pos]);
+					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					$form = $form . yesno($fields_name[$pos], '1');
 					$pos = $pos + 1;					
@@ -154,7 +262,7 @@
 					$form = $form . status($fields_name[$pos], '1');
 					$pos = $pos + 1;					
 				}else if ($field_type[$pos] =="billing_type"){
-					$form = $form . yesno($fields_name[$pos], '0');
+					$form = $form . billing_type($fields_name[$pos], '0', $field_size[$pos]);
 					$pos = $pos + 1;					
 				}else{		
 				    $aux = "";
@@ -179,6 +287,33 @@
 				if ($field_type[$pos] =="person_type"){
 					$form = $form . person_type($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;
+				}else if (($field_type[$pos] =="project_filter")){
+					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="event_filter")){
+					$form = $form . event_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="person_filter")){
+					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
+					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
+					$pos = $pos + 1;					
+				}else if (($field_type[$pos] =="status")){
+					$form = $form . status($fields_name[$pos], $r[$fields_name[$pos]]);
+					$pos = $pos + 1;					
+				}else if ($field_type[$pos] =="billing_type"){
+					$form = $form . billing_type($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
+				}else{
+				/*	
+					
+				if ($field_type[$pos] =="person_type"){
+					$form = $form . person_type($fields_name[$pos], $r[$fields_name[$pos]]);
+					$pos = $pos + 1;
+				}else if (($field_type[$pos] == "person_filter")){
+					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;					
@@ -188,7 +323,7 @@
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;					
-				}else{
+				}else{*/
 					$form = $form.
 	"<input class='field' type='".$field_type[$pos]."' placeholder='".$placeholder[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' value='".$r[$fields_name[$pos]]."'>";
 					if ($new_line[$pos]=="yes"){

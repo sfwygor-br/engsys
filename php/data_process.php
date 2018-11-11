@@ -23,7 +23,9 @@
 		$pos = 0;
 		$f__ = "";
 		$v__ = "";
+		$SSS = "";
 		foreach($GLOBALS['fields_name'][$_POST['page']] as $field){
+			$SSS = $SSS . $_POST[$field];
 			$f__ = $f__ . $field;
 			if ($field != $lastelement){
 				$f__ = $f__ . ", ";
@@ -53,7 +55,7 @@
 		if (mysqli_query($GLOBALS['conn'], $sql)){
 			echo"ok";
 		}else{
-			echo"$sql - $pos";
+			echo"$sql - $v__";
 		}
 	};
 	

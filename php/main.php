@@ -115,6 +115,25 @@
 						}
 					});
 				};
+				
+				$('#logout').hover(function() {
+					$(this).css('cursor','pointer');
+					$('.green-dot').css('background-color','red');
+				}, function() {
+					$(this).css('cursor','auto');
+					$('.green-dot').css('background-color',' #4CBB17');
+				});
+				
+				$('#new-reg').hover(function() {
+					$(this).css('cursor','pointer');
+				}, function() {
+					$(this).css('cursor','auto');
+				});
+				
+				$(window).resize(function() {
+					$('body').css('display', 'none');
+				});
+				
 			});
 		</script>
 	</head>
@@ -125,7 +144,7 @@
 			<nav>
 			$nav
 			</nav>
-			<div id='logout'><div class='green-dot-text'>" . $_SESSION["username"] . "</div><div class='green-dot'></div></div>
+			<div id='logout'><div class='green-dot-text'>" . @$_SESSION["username"] . "</div><div class='green-dot'></div></div>
 		</header>
 		<div class='separator'></div>
 		<aside>

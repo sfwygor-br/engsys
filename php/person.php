@@ -4,6 +4,7 @@
 	include("connection.php");
 	include("builder.php");
 	include("variables.php");
+	session_start();
 	connect();
 	$page = 'person';
 	if ($action == ""){
@@ -24,7 +25,8 @@
 											 $x,
 											 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
 											 null,
-											 null
+											 8,
+											 $_SESSION["iduser_integ"]
 											);
 		}else if ($action == 'UPDATE'){
 			$page = 'person';
@@ -41,6 +43,7 @@
 												 $x,
 												 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
 												 $rs,
+												 null,
 												 null,
 												 null
 												);
@@ -144,7 +147,7 @@
 					   else
 						   'Não'
 					   end c_provider
-				  from person";
+				  from person where iduser_integ = " . $_SESSION["iduser_integ"];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
 			$section = $section . build_grid(array("idperson", "name", "c_provider"), 
