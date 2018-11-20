@@ -4,8 +4,8 @@
 		echo"<script>location='./php/dashboard.php'</script>";
 		header("Location: ./php/dashboard.php");
 	}else{
-		@$user     = $_POST["username"];
-		@$password = $_POST["password"];
+		@$user     = strtoupper($_POST["username"]);
+		@$password = strtoupper($_POST["password"]);
 		require("./php/connection.php");
 		require("./php/security.php");
 		$display = True;
@@ -46,10 +46,11 @@
 	<body>
 		<div id='login'>
 			<form class='login-form' method='POST'>
-				<input class='input-field' type='text' name='username' placeholer='Usuário'>
-				<input class='input-field' type='password' name='password' placeholer='Senha'>
+				<div class='label'>Usuário:</div><input class='input-field' type='text' name='username'>
+				<div class='label'>Senha:</div><input class='input-field' type='password' name='password' placeholer='Senha'>
 				<input class='login-button' type='submit' value='Login'>
 			</form>
+			<div id='use-solic'><a href='./signup.php'> Solicitar Uso </a></div>
 			$status_inactive
 		</div>
 	</body>

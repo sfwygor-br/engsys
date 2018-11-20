@@ -23,7 +23,7 @@
 											 "./data_process.php", 
 											 "budget", 
 											 $x,
-											 array("yes", "no", "no", "no", "no", "no", "yes", "no", "no", "no"),
+											 array("yes", "no", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
 											 null,
 											 9,
 											 $_SESSION["iduser_integ"]
@@ -41,7 +41,7 @@
 												 "./data_process.php", 
 												 "budget", 
 												 $x,
-												 array("yes", "no", "no", "no", "no", "no", "yes", "no", "no", "no"),
+												 array("yes", "no", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
 												 $rs,
 												 9,
 												 null
@@ -50,7 +50,7 @@
 		};
 	}else{
 		$sql = "select idbudget,
-					   idperson,
+					   (select name from person where person.idperson = budget.idperson) name,
 					   initial_date,
 					   final_date,
 					   value
@@ -58,9 +58,9 @@
 				 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
-			$section = $section . build_grid(array("idbudget", "idperson", "initial_date", "final_date", "value"), 
+			$section = $section . build_grid(array("idbudget", "name", "initial_date", "final_date", "value"), 
 											 array("Código", "Cliente", "Data Início", "Data Término", "Valor"),			                                
-											 array("50", "100", "30", "30"),
+											 array("100", "300", "130", "140", "100"),
 											 $rs,
 											 "./budget.php?action=UPDATE",
 											 array("idbudget"));

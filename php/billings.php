@@ -6,7 +6,7 @@
 	include("builder.php");
 	include("variables.php");
 	connect();
-	$page = 'billing';
+	$page = 'billings';
 	if ($action == ""){
 		$section = "<div id='new-reg' onclick='location=\"./billings.php?action=INSERT\"'>Novo</div>";
 	}
@@ -14,7 +14,7 @@
 	if (($action == 'INSERT') or ($action == 'UPDATE')){
 		
 		if ($action == 'INSERT'){
-			$page = 'billing';
+			#$page = 'billing';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['billing'], 
 											 array("", "", "idevent", "idperson", "idproject", "Natureza", "Data de Processamento", "Data de Vencimento", "Valor", "Data de Pagamento", "Valor Pago"),
@@ -29,7 +29,7 @@
 											 $_SESSION["iduser_integ"]
 											);
 		}else if ($action == 'UPDATE'){
-			$page = 'billing';
+			#$page = 'billing';
 			$x = 'update';
 			$sql = "Select * from billing where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);

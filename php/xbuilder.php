@@ -137,7 +137,7 @@
 		
 		function person_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		<select name='$field' class='field' style='width: $size;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione o Cliente </option>
@@ -165,7 +165,7 @@
 		
 		function event_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		<select name='$field' class='field' style='width: $size;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione o Evento </option>
@@ -193,7 +193,7 @@
 		
 		function project_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		<select name='$field' class='field' style='width: $size;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione o Projeto </option>
@@ -213,38 +213,6 @@
 					$aux = "selected";
 				};
 				$x = $x . "<option value='" . $r["idproject"] . "' $aux>" . $r["description"] . "</option>";
-			}		
-            $x = $x . "
-			</select>";			
-			return($x);
-		}
-		
-		function budget_filter($field, $selected, $size){
-			$y = "";
-			if (isset($selected)){
-				$y = " ";
-			};
-			$x = "
-		<select name='$field' class='field' style='width: 100%' $y>";
-		    if (!isset($selected)){
-				$x = $x . "
-				<option value='null' selected> Selecione o Orçamento </option>
-				";
-			}
-			
-			$sql = "select idbudget,
-						   concat('Início: ',initial_date,', Término: ',final_date,', Cliente: ',(select substr(person.name, 0, 400) from person where person.idperson = budget.idperson)) as description
-			          from budget
-					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
-					order by description desc";
-			connect();
-			$aux = "";
-			$rs  = mysqli_query($GLOBALS["conn"], $sql);
-		    while($r = mysqli_fetch_assoc($rs)){
-				if ($selected == $r["idbudget"]){
-					$aux = "selected";
-				};
-				$x = $x . "<option value='" . $r["idbudget"] . "' $aux>" . $r["description"] . "</option>";
 			}		
             $x = $x . "
 			</select>";			
@@ -281,9 +249,6 @@
 				}else if (($field_type[$pos] =="project_filter")){
 					$form = $form . project_filter($fields_name[$pos], null, $field_size[$pos]);
 					$pos = $pos + 1;					
-				}else if (($field_type[$pos] =="budget_filter")){
-					$form = $form . budget_filter($fields_name[$pos], null, $field_size[$pos]);
-					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="event_filter")){
 					$form = $form . event_filter($fields_name[$pos], null, $field_size[$pos]);
 					$pos = $pos + 1;					
@@ -299,12 +264,6 @@
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . billing_type($fields_name[$pos], '0', $field_size[$pos]);
 					$pos = $pos + 1;					
-				}else if ($field_type[$pos] =="textarea"){
-					$form = $form.
-	"<br />
-	<br />
-	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' cols='".$field_size[$pos]."' rows='50' name='".$fields_name[$pos]."'></textarea>";
-					$pos = $pos + 1;					
 				}else{		
 				    $aux = "";
                     if (!empty($fk)){
@@ -313,7 +272,7 @@
 						}
 					}				
 					$form = $form.
-	"<label> " . $placeholder[$pos] . "</label> <input class='field' type='".$field_type[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' $aux>";
+	"<input class='field' type='".$field_type[$pos]."' placeholder='".$placeholder[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' $aux>";
 					if ($new_line[$pos]=="yes"){
 						$form = $form."</p>
 	<p>";	
@@ -331,9 +290,6 @@
 				}else if (($field_type[$pos] =="project_filter")){
 					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					
-				}else if (($field_type[$pos] =="budget_filter")){
-					$form = $form . budget_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
-					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="event_filter")){
 					$form = $form . event_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					
@@ -348,12 +304,6 @@
 					$pos = $pos + 1;					
 				}else if ($field_type[$pos] =="billing_type"){
 					$form = $form . billing_type($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
-					$pos = $pos + 1;					
-				}else if ($field_type[$pos] =="textarea"){
-					$form = $form.
-	"<br />
-	<br />
-	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' cols='".$field_size[$pos]."' rows='50' name='".$fields_name[$pos]."'>". $r[$fields_name[$pos]]."</textarea>";
 					$pos = $pos + 1;					
 				}else{
 				/*	
@@ -375,7 +325,7 @@
 					$pos = $pos + 1;					
 				}else{*/
 					$form = $form.
-	"<label> " . $placeholder[$pos] . "</label>	<input class='field' type='".$field_type[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' value='".$r[$fields_name[$pos]]."'>";
+	"<input class='field' type='".$field_type[$pos]."' placeholder='".$placeholder[$pos]."' size='".$field_size[$pos]."' name='".$fields_name[$pos]."' value='".$r[$fields_name[$pos]]."'>";
 					if ($new_line[$pos]=="yes"){
 						$form = $form."</p>
 	<p>";	
@@ -387,18 +337,14 @@
 		
 		if (in_array($table, array("phone", "adress", "person"))){
 			$page_aux = "person";
-		} else if (in_array($table, array("project", "project_stage", "attachment", "operation"))){
-			$page_aux = "projects";
-		} else if (in_array($table, array("billing"))){
-			$page_aux = "billings";
 		}else{
 			$page_aux = $table;
 		}
 		
 		if ($action == "insert"){
-			$aux = "<p><input class='button' type='button' value='Gravar' id='insert_btn'><input class='button' type='button' value='Cancelar' id='cancel_btn' onclick='location=\"./".$page_aux.".php\"'>";
+			$aux = "<p><input class='button' type='button' value='Gravar' id='insert'><input class='button' type='button' value='Cancelar' onclick='location=\"./".$page_aux.".php\"'>";
 		}else if ($action == 'update'){
-			$aux = "<p><input class='button' type='button' value='Salvar' id='update_btn'><input class='button' type='button' value='Excluir' id='delete_btn'><input class='button' type='button' value='Cancelar' id='cancel_btn' onclick='location=\"./".$page_aux.".php\"'>";
+			$aux = "<p><input class='button' type='button' value='Salvar' id='update'><input class='button' type='button' value='Excluir' id='delete'><input class='button' type='button' value='Cancelar' onclick='location=\"./".$page_aux.".php\"'>";
 		}
 		$form = $form.
 	"

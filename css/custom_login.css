@@ -6,16 +6,16 @@
 }
 
 .input-field{
-	width: 70%;
+	width: 50%;
 	height: 50px;
 	line-height: 50px;
 	border: solid 1px;
-	clear: both;
 	margin-top: 10%;
 	margin-left: 15%;
 	padding: 3px;
 	font-size: 20pt;
 	color: gray;
+	float: left;
 }
 
 .login-button{
@@ -29,4 +29,31 @@
 	background-color: transparent;
 	font-size: 20pt;
 	color: gray;
+}
+
+#use-solic{
+	width: 200px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	float: left;
+	clear: both;
+	margin-left: 15%;
+	background-color: #3a4858;
+	font-weight: bold;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+
+.label{
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	clear: both;
+	margin-top: 10%;
+	font-size: 20pt;
+	float: left;
 }

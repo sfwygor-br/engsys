@@ -20,6 +20,18 @@
 	$GLOBALS['fields_name']['billing'] 			= array("idbilling", "iduser_integ", "idevent", "idperson", "idproject", "type", "processing_date", "maturity_date", "value", "payment_date", "value_payed");
 	$GLOBALS['fields_type']['billing'] 			= array("number", "number", "number", "number", "number", "number", "date", "date", "number", "date", "number");
 	
+	$GLOBALS['fields_name']['project'] 			= array("idproject", "idbudget", "expected_initial_date", "expected_final_date", "initial_date", "final_date", "area", "value", "description", "iduser_integ");
+	$GLOBALS['fields_type']['project'] 			= array("number", "number", "date", "date", "date", "date", "varchar", "varchar", "varchar", "number");
+	
+	$GLOBALS['fields_name']['project_stage'] 	= array("idproject_stage", "idproject", "description", "expected_initial_date", "expected_final_date", "initial_date", "final_date", "status");
+	$GLOBALS['fields_type']['project_stage']    = array("number", "number", "varchar", "date", "date", "date", "date", "number");
+	
+	$GLOBALS['fields_name']['attachment'] 		= array("idattachment", "idproject", "description", "path");
+	$GLOBALS['fields_type']['attachment']		= array("number", "number", "varchar", "varchar");
+	
+	$GLOBALS['fields_name']['operation'] 		= array("idoperation", "idproject");
+	$GLOBALS['fields_type']['operation'] 		= array("number", "number");
+	
 	#for data process only
 	$GLOBALS['is_key']['person'] 				= array("yes", "no", "no", "no", "no", "no", "no", "no", "no");
 	$GLOBALS['is_key']['phone'] 				= array("yes", "yes", "no", "no");
@@ -28,4 +40,8 @@
 	$GLOBALS['is_key']['budget']				= array("yes", "yes", "no", "no", "no", "no", "no", "no", "no", "yes");
 	$GLOBALS['is_key']['event'] 				= array("yes", "yes", "no", "no");
 	$GLOBALS['is_key']['billing'] 				= array("yes", "yes", "no", "no", "no", "no", "no", "no", "no", "no", "no");
+	$GLOBALS['is_key']['project'] 				= array("yes", "no", "no", "no", "no", "no", "no", "no", "no", "yes");
+	$GLOBALS['is_key']['project_stage'] 		= array("yes", "yes", "no", "no", "no", "no", "no", "no");
+	$GLOBALS['is_key']['attachment'] 			= array("yes", "yes", "no", "no");
+	$GLOBALS['is_key']['operation']				= array("yes", "yes");
 ?>
