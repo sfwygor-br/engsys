@@ -104,8 +104,7 @@
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=update&page=$page',
 							success:function(data) {
-								alert(data);
-								
+									alert(data);
 							} 
 						});		
 					});

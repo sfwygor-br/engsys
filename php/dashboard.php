@@ -10,6 +10,95 @@
 	$plot -> SetYTitle("Quantidade");
 	#$plot -> SetPrecisionY(1);
 	#$plot -> SetPlotType("bars");
+	connect();
+	#SQL RETURNS PRIMARY DATA
+	$srpd = "
+			select *
+			  from (
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 1
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 2
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 3
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 4
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 5
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 6
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 7
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 8
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 9
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 10
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 11
+					union all
+					select coalesce(count(idbudget), 0) field, 'Orçamentos' indicator_name from budget where month(initial_date) = 12
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 1
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 2
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 3
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 4
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 5
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 6
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 7
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 8
+					union all
+					select coalesce(count(idproject), 0) field, 'Projetos' indicator_name from project where month(initial_date) = 9
+					union all
+					select coalesce(count(idbudget), 0) field, 'Projetos' indicator_name from budget where month(initial_date) = 10
+					union all
+					select coalesce(count(idbudget), 0) field, 'Projetos' indicator_name from budget where month(initial_date) = 11
+					union all
+					select coalesce(count(idbudget), 0) field, 'Projetos' indicator_name from budget where month(initial_date) = 12
+              )tmp;
+	";
+	$array_master = array();
+	$array_sbdata = array();
+	$row = 2;
+	$flag = True;
+
+	$rs = mysqli_query($GLOBALS["conn"], $srpd);
+	$label = "";
+	while($r = mysqli_fetch_assoc($rs)){
+		if ($r["indicator"] = "Projetos"){
+			if ($row/2 == 0){
+				array_push($array_sbdata, $r["indicator_name"]);
+				$row = $row + 1;
+			}else{
+				array_push($array_sbdata, $r["field"]);
+			}
+		}
+		
+		if ($r["indicator"] = "Orçamentos"){
+			if ($flag == True){
+				array_push($array_master, $array_sbdata);
+				unset($array_sbdata);
+				$flag = False;
+			}
+			
+			if ($row/2 == 0){
+				array_push($array_sbdata, $r["indicator_name"]);
+				$row = $row + 1;
+			}else{
+				array_push($array_sbdata, $r["field"]);
+			}
+		}		
+	}
+	array_push($array_master, $array_sbdata);
+	echo json_encode($array_master);
+	
 	
 	$sql = "
 			select case
@@ -49,7 +138,6 @@
 	";
 	
 	$data = array();
-	connect();
 	$rs = mysqli_query($GLOBALS["conn"], $sql);
 	$last_legend_text = "";
 	$arr_jan = array();
@@ -223,6 +311,6 @@
 	";
 	
 	
-	ob_end_clean();
+	#ob_end_clean();
 	load_base_page("Dashboard", "dashboard", $section);
 ?>

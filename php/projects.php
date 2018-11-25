@@ -18,7 +18,7 @@
 			$page = 'project';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['project'], 
-											 array("Código", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
+											 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
 											 array("0", "500", "50", "10", "20", "20", "50", "10", "53", "0", "0"), 
 											 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 											 "./data_process.php",
@@ -36,7 +36,7 @@
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){	
 				$section = $section . build_form($GLOBALS['fields_name']['project'], 
-												 array("Código", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
+												 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
 												 array("0", "500", "50", "10", "20", "20", "50", "10", "53", "0", "0"), 
 												 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 												 "./data_process.php", 

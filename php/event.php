@@ -18,7 +18,7 @@
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['event'], 
 											 array("", "", "Descrição", "Natureza"), 
-											 array("0", "0", "50", "50"),
+											 array("0", "0", "50", "200"),
 											 array("hidden", "hidden", "text", "billing_type"), 
 											 "./data_process.php", 
 											 "event", 
@@ -36,7 +36,7 @@
 		    if ($rs == True){
 				$section = $section . build_form($GLOBALS['fields_name']['event'], 
 												 array("", "", "Descrição", "Natureza"), 
-												 array("0", "0", "50", "50"),
+												 array("0", "0", "50", "200"),
 												 array("hidden", "hidden", "text", "billing_type"), 
 												 "./data_process.php", 
 												 "event", 

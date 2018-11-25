@@ -17,13 +17,13 @@
 			$page = 'user';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['user'], 
-											 array("", "Usuário", "Senha", "E-mail", "", "Status", "Id Integração"), 
+											 array("", "Usuário", "Senha", "E-mail", "", "Status", ""), 
 											 array("0", "50", "50", "50", "0", "10", "0"),
-											 array("hidden", "Text", "password", "email", "date", "status", "hidden"), 
+											 array("hidden", "Text", "password", "email", "hidden", "status", "hidden"), 
 											 "./data_process.php", 
 											 "user", 
 											 $x,
-											 array("no", "no", "no", "yes", "no", "no", "no"),
+											 array("yes", "yes", "yes", "yes", "no", "no", "no"),
 											 null,
 											 6,
 											 $_SESSION["iduser_integ"]
@@ -35,13 +35,13 @@
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
 				$section = $section . build_form($GLOBALS['fields_name']['user'], 
-												 array("", "Usuário", "Senha", "E-mail", "", "Status", "Id Integração"), 
+												 array("", "Usuário", "Senha", "E-mail", "", "Status", ""), 
 												 array("0", "50", "50", "50", "0", "10", "0"),
-												 array("hidden", "Text", "password", "email", "date", "status", "hidden"), 
+												 array("hidden", "Text", "password", "email", "hidden", "status", "hidden"), 
 												 "./data_process.php", 
 												 "user", 
 												 $x,
-												 array("no", "no", "no", "yes", "no", "no", "no"),
+												 array("yes", "yes", "yes", "yes", "no", "no", "no"),
 												 $rs,
 												 null,
 												 null

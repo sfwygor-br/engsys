@@ -17,7 +17,7 @@
 			$page = 'person';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['person'], 
-											 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", "IUI"), 
+											 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", ""), 
 											 array("0", "50", "50", "10", "20", "20", "50", "10", "20", "20"), 
 											 array("hidden", "Text", "Text", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
 											 "./data_process.php", 
@@ -35,7 +35,7 @@
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){	
 				$section = $section . build_form($GLOBALS['fields_name']['person'], 
-												 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", "IUI"), 
+												 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", ""), 
 												 array("0", "50", "50", "10", "20", "20", "50", "10", "20", "20"), 
 												 array("hidden", "Text", "Text", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
 												 "./data_process.php", 

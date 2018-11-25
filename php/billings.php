@@ -17,13 +17,13 @@
 			#$page = 'billing';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['billing'], 
-											 array("", "", "idevent", "idperson", "idproject", "Natureza", "Data de Processamento", "Data de Vencimento", "Valor", "Data de Pagamento", "Valor Pago"),
+											 array("", "", "idevent", "idperson", "idproject", "Natureza", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
 											 array("0", "0", "1000", "1000", "1000", "150", "50", "50", "20", "50", "50"),
 											 array("hidden", "hidden", "event_filter", "person_filter", "project_filter", "billing_type", "date", "date", "text", "hidden", "hidden"), 
 											 "./data_process.php", 
 											 "billing", 
 											 $x,
-											 array("yes", "yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "yes"),
+											 array("yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "yes", "yes"),
 											 null,
 											 1,
 											 $_SESSION["iduser_integ"]
