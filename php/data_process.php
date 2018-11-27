@@ -51,11 +51,12 @@
 			
 		}
 		$sql = $sql . $f__ . ") values(" . $v__ . ")";
+		echo $sql;
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
-			return("Registro inserido!");
+			echo "Registro inserido!";
 		}else{
-			return(mysqli_error($GLOBALS['conn']));
+			echo mysqli_error($GLOBALS['conn']);
 		}
 	};
 	
@@ -82,6 +83,9 @@
 			if ($GLOBALS['is_key'][$_POST['page']][$pos] == "yes"){
 				$sql = $sql . $field . " = " . $_POST[$field];
 			}
+			if (end($GLOBALS['is_key'][$_POST['page']])){
+				break;
+			}
 			if ($GLOBALS['is_key'][$_POST['page']][$pos + 1] == "yes"){
 				$sql = $sql . " and ";
 			}
@@ -90,9 +94,9 @@
 		
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
-			return("Registro atualizado!");
+			echo "Registro atualizado!";
 		}else{
-			return(mysqli_error($GLOBALS['conn']));
+			echo mysqli_error($GLOBALS['conn']);
 		}
 	};
 	
@@ -111,9 +115,9 @@
 		
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
-			return("Registro deletado!");
+			echo "Registro deletado!";
 		}else{
-			return(mysqli_error($GLOBALS['conn']));
+			echo mysqli_error($GLOBALS['conn']);
 		}
 	}
 ?>

@@ -1,8 +1,7 @@
 ﻿<?php
 	session_start();
 	if(isset($_SESSION["iduser_integ"])){
-		echo"<script>location='./php/dashboard.php'</script>";
-		header("Location: ./php/dashboard.php");
+		echo "<script> location='./php/dashboard.php?width='+screen.width;</script>";	
 	}else{
 		@$user     = strtoupper($_POST["username"]);
 		@$password = strtoupper($_POST["password"]);
@@ -14,7 +13,8 @@
 		$status_inactive = "";
 		if((!empty($user)) and (!empty($password))){
 			#echo"<script>alert($user+$password)</script>";
-			$sql = "select * from user where username = '$user' and password = '$password'";
+			$sql = "select * from user where upper(username) = '$user' and upper(password) = '$password'";
+			echo $sql;
 			$rs  = mysqli_query($GLOBALS['conn'], $sql);
 			if ($rs == True){			
 				if (mysqli_num_rows($rs) == 1) {
@@ -24,7 +24,7 @@
 						$_SESSION["iduser"]       = $res["iduser"];
 						$_SESSION["iduser_integ"] = $res["iduser_integ"];
 						$_SESSION["username"]     = $res["username"];
-						header("Location: ./php/dashboard.php");	
+						echo "<script> location='./php/dashboard.php?width='+screen.width;</script>";	
 					}else{
 						$status_inactive = "<script>alert('Usuário Inativo: Contate o administrador do sistemma')</script>";
 					}

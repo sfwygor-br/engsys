@@ -5,7 +5,7 @@
 	include("builder.php");
 	include("variables.php");
 	connect();
-	$page = 'budget';
+	$page = 'maintenance';
 	
 	$iduser_integ = $_SESSION["iduser_integ"];
 	$sql = "select param.*,

@@ -84,6 +84,7 @@ pre{
 	line-height: 50px;
 	float:right;
 	background-color: #757e8a;
+	text-align: center;
 }
 
 .a-nav{
@@ -102,7 +103,7 @@ pre{
 }
 
 .div-a-nav{
-	width: 100px;
+	width: 95px;
 	height: 50px;
 	color: white;	
 	background-color: #757e8a;
@@ -110,7 +111,7 @@ pre{
 }
 
 .div-a-nav:hover{
-	width: 100px;
+	width: 95px;
 	height: 50px;
 	color: white;	
 	background-color: #3a4858;
@@ -145,6 +146,12 @@ pre{
 	position: fixed;
 	float:left;
 	clear: both;
+}
+
+#nav-container{
+	width: 100%;
+	height: 53px;
+	z-index: 300;
 }
 
 #new-reg{

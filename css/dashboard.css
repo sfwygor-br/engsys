@@ -1,11 +1,49 @@
-﻿#notification{
+﻿#notif{
 	width: 100%;
-	min-height: 250px;
 	border: solid 1px;
+	color: white;
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
+#notif-deadline{
+	height: 30px;
+	background-color: #757e8a;
+	float: left;
+	clear: both;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 10px;
+	line-height: 30px;
+}
+
+.a-notif{
+	text-decoration: none;
+	color: inherited;
+	margin-left: 10px;
 }
 
 #charts{
 	width: 100%;
 	min-height: 250px;
-	border: solid 1px;
+	float: left;
+	clear: both;
+	margin-top: 10px;
+}
+
+#notif-msg{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background-color: #757e8a;
+	float: left;
+	clear: both;
+	font-weight: bold;
+	/*position: fixed;*/
+}
+
+#notif-msg-container{
+	width: 100%;
+	height: 30px;
+	color: white;
 }

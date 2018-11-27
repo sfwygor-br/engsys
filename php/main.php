@@ -3,6 +3,15 @@
 		ob_start();
 		#ob_end_clean();
 		session_start();
+		if (in_array($page, array("phone", "adress", "person"))){
+			$page_aux = "person";
+		} else if (in_array($page, array("project", "project_stage", "attachment", "operation"))){
+			$page_aux = "projects";
+		} else if (in_array($page, array("billing"))){
+			$page_aux = "billings";
+		}else{
+			$page_aux = $page;
+		}
 		#$page = $v;
 		$nav  = "";
 		$comp = "";
@@ -15,7 +24,9 @@
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
 				$comp = "<link type='text/css' rel='stylesheet' href='../css/dashboard.css' />";
 			}else if($page == 'budget'){
@@ -25,7 +36,9 @@
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
 			}else if($page == 'project'){
 				$nav =   
@@ -34,7 +47,9 @@
 					<a href='./projects.php' class='a-nav-active'><div class='div-a-nav-active'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
 			}else if(($page == 'person') or ($page == 'phone') or ($page == 'adress')){
 				$nav =   
@@ -43,16 +58,31 @@
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav-active'><div class='div-a-nav-active'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
-			}else if($page == 'billings'){
+			}else if($page == 'billing'){
 				$nav =   
 				   "	<a href='./dashboard.php' class='a-nav'><div class='div-a-nav'>DASHBOARD</div></a>
 				    <a href='./budget.php' class='a-nav'><div class='div-a-nav'>Orçamentos</div></a>
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav-active'><div class='div-a-nav-active'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
+					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
+			}else if($page == 'event'){
+				$nav =   
+				   "	<a href='./dashboard.php' class='a-nav'><div class='div-a-nav'>DASHBOARD</div></a>
+				    <a href='./budget.php' class='a-nav'><div class='div-a-nav'>Orçamentos</div></a>
+					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
+					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
+					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav-active'><div class='div-a-nav-active'>Eventos</div></a>
+					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
 			}else if($page == 'maintenance'){
 				$nav =   
@@ -61,7 +91,20 @@
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav-active'><div class='div-a-nav-active'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
+					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
+			}else if($page == 'user'){
+				$nav =   
+				   "	<a href='./dashboard.php' class='a-nav'><div class='div-a-nav'>DASHBOARD</div></a>
+				    <a href='./budget.php' class='a-nav'><div class='div-a-nav'>Orçamentos</div></a>
+					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
+					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>
+					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
+					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav-active'><div class='div-a-nav-active'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav'><div class='div-a-nav'>Relatórios</div></a>";
 			}else if($page == 'reports'){
 				$nav =   
@@ -70,7 +113,9 @@
 					<a href='./projects.php' class='a-nav'><div class='div-a-nav'>Projetos</div></a>
 					<a href='./person.php' class='a-nav'><div class='div-a-nav'>Pessoas</div></a>			
 					<a href='./billings.php' class='a-nav'><div class='div-a-nav'>Contas</div></a>
+					<a href='./event.php' class='a-nav'><div class='div-a-nav'>Eventos</div></a>
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
+					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav-active'><div class='div-a-nav-active'>Relatórios</div></a>";
 			};
 		};
@@ -104,7 +149,13 @@
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=update&page=$page',
 							success:function(data) {
-									alert(data);
+									//alert(data);
+									if (data.trim() != 'Registro atualizado!'){
+										alert(data);
+									}else{
+										alert(data);
+										location.reload();
+									}
 							} 
 						});		
 					});
@@ -118,7 +169,13 @@
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=insert&page=$page',
 							success:function(data) {
-								alert(data);/*
+								//alert(data);
+								if (data.trim() != 'Registro inserido!'){
+									alert(data);
+								}else{
+									alert(data);
+									location = './$page_aux.php';
+								}/*
 
 vex.defaultOptions.className = 'vex-theme-os';
 
@@ -155,7 +212,13 @@ mostreFeedback();	)*/
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=delete&page=$page',
 							success:function(data) {
-								alert(data);
+								//alert(data);
+								if (data.trim() != 'Registro deletado!'){
+									alert(data);
+								}else{
+									alert(data);
+									location = './$page_aux.php';
+								}
 							}  
 						});		
 					});
@@ -223,14 +286,16 @@ mostreFeedback();	)*/
 	</head>
 
 	<body>
-		<header>
-			<div id='logo'> ENGSYS </div>
-			<nav>
-			$nav
-			</nav>
-			<div id='logout'><div class='green-dot-text'>" . @$_SESSION["username"] . "</div><div class='green-dot'></div></div>
-		</header>
-		<div class='separator'></div>
+	    <div id='nav-container'>
+			<header>
+				<div id='logo'> ENGSYS </div>
+				<nav>
+				$nav
+				</nav>
+				<div id='logout'><div class='green-dot-text'>" . @$_SESSION["username"] . "</div><div class='green-dot'></div></div>
+			</header>
+			<div class='separator'></div>
+		</div>
 		<aside>
 		</aside>
 		<!--<section>

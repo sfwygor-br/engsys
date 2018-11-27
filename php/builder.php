@@ -163,6 +163,36 @@
 			return($x);
 		}
 		
+		function person_provider($field, $selected, $size){
+			$x = "
+		<select name='$field' class='field' style='width: 100%;'>";
+		    if (!isset($selected)){
+				$x = $x . "
+				<option value='null' selected> Selecione Prestador de Serviços </option>
+				";
+			};
+			
+			$sql = "select idperson,
+						   name
+			          from person
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
+					   and provider = 1
+					order by name desc";
+			connect();
+			echo $sql;
+			$aux = "";
+			$rs  = mysqli_query($GLOBALS["conn"], $sql);
+		    while($r = mysqli_fetch_assoc($rs)){
+				if ($selected == $r["idperson"]){
+					$aux = "selected";
+				};
+				$x = $x . "<option value='" . $r["idperson"] . "' $aux>" . $r["name"] . "</option>";
+			}		
+            $x = $x . "
+			</select>";			
+			return($x);
+		}
+		
 		function event_filter($field, $selected, $size){
 			$x = "
 		<select name='$field' class='field' style='width: 100%;'>";
@@ -201,7 +231,7 @@
 			};
 			
 			$sql = "select idproject,
-						   substr(description, 0, 500) description
+						   description
 			          from project
 					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
 					order by description desc";
@@ -278,6 +308,9 @@
 				if ($field_type[$pos] =="person_type"){
 					$form = $form . person_type($fields_name[$pos], '0');
 					$pos = $pos + 1;
+				}else if (($field_type[$pos] =="person_provider")){
+					$form = $form . person_provider($fields_name[$pos], null, $field_size[$pos]);
+					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="project_filter")){
 					$form = $form . project_filter($fields_name[$pos], null, $field_size[$pos]);
 					$pos = $pos + 1;					
@@ -328,6 +361,9 @@
 				if ($field_type[$pos] =="person_type"){
 					$form = $form . person_type($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;
+				}else if (($field_type[$pos] =="person_provider")){
+					$form = $form . person_provider($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="project_filter")){
 					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					

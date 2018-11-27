@@ -66,7 +66,7 @@
 				if (($rs == True) and (mysqli_num_rows($rs) > 0)){
 					$section = $section . build_grid(array("idproject_stage", "description", "initial_date", "final_date", "status"),
 					                                 array("Código", "Descrição", "Data Início", "Data Término", "Status"),													 
-													 array("50", "500", "50", "50", "50"),
+													 array("50", "500", "130", "140", "50"),
 													 $rs,
 													 "./projects.php?action=PROJECTSTAGEUPDATE&idproject=".$_GET['idproject'],
 													 array("idproject_stage", "idproject")
@@ -195,7 +195,7 @@
 		if (($rs == True) and (mysqli_num_rows($rs) > 0)){	
 			$section = $section . build_grid(array("idproject", "name", "initial_date", "final_date", "value"), 
 											 array("Código", "Cliente", "Data Início", "Data Término", "Valor"),			                                 
-											 array("50", "500", "50", "50", "50"),
+											 array("50", "500", "130", "140", "100"),
 											 $rs,
 											 "./projects.php?action=UPDATE",
 											 array("idproject")
