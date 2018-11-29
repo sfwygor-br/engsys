@@ -68,7 +68,7 @@ select 'purple' as color,
 	$sql = "
 select tmp.*
   from(
-       select 'Abertura de orçamentos' indicator_name,
+       select 'Abertura de orcamentos' indicator_name,
                 
               (select coalesce(count(idbudget), 0)
                  from budget 
@@ -133,7 +133,7 @@ select tmp.*
 union all
 select tmp.*
   from(
-       select 'Encerramento de orçamentos' indicator_name,
+       select 'Encerramento de orcamentos' indicator_name,
                 
               (select coalesce(count(idbudget), 0)
                  from budget 

@@ -166,6 +166,9 @@
 					document.getElementById ('insert_btn').addEventListener('click', function(){
 						$.ajax({
 							type: 'POST',
+							enctype: 'multipart/form-data',
+							contentType: false, // desabilitar o cabeçalho 'Content-Type'
+							processData: false, // impedir que o jQuery tranforma a 'data' em querystring
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=insert&page=$page',
 							success:function(data) {

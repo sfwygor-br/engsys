@@ -138,7 +138,7 @@
 		$section = $section . build_form($GLOBALS['fields_name']['attachment'],
 		                                 array("", "", "Descrição", "Arquivo"), 									    
 										 array("0", "0", "60", "100"), 
-										 array("hidden", "hidden", "textarea", "text"), 
+										 array("hidden", "hidden", "textarea", "file"), 
 										 "./data_process.php", 
 										 "attachment", 
 										 $x,
@@ -202,7 +202,7 @@
 											);
 		}
 	}
-	ob_end_clean();		
+	#ob_end_clean();		
 	load_base_page("Projetos", $page, $section);
 	disconnect();
 ?>

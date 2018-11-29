@@ -50,17 +50,8 @@
 			$result = "<script>alert(\"".mysqli_error($GLOBALS['conn'])."\")</script>";
 		}
 	}
-	$iduser_integ = $_SESSION["iduser_integ"];
-	$sql = "select param.crea			       
-			  from parameter param,
-			       user
-			 where param.iduser_integ = $iduser_integ
-			   and confi.iduser_integ = $iduser_integ
-			   and const.iduser_integ = $iduser_integ";
-	$rs  = mysqli_query($GLOBALS["conn"], $sql);
-	$r 	 = mysqli_fetch_assoc($rs);
 	
-	$screen = "
+/*	$screen = "
 <html>
 	<head>
 		<link type='text/css' rel='stylesheet' href='./css/global.css' />
@@ -69,19 +60,19 @@
 	<body>
 		<div id='maintenance'>
 			<form method='POST' action='./signup.php'>
-			    <div class='label-signup'>E-mail</div> <input class='field-signup' type='email' name='o1'>
+			    <div >E-mail</div> <input class='field' type='email' name='o1'>
 				<fieldset><pre> Dados do engenheiro </pre>
-					<div class='label-signup'>Nome</div> <input class='field-signup' type='text' name='p1'><br />
-					<div class='label-signup'>CREA</div> <input class='field-signup' type='text' name='p2'><br />
-					<div class='label-signup'>Cidade</div> <input class='field-signup' type='text' name='p3'><br />
-					<div class='label-signup'>Estado</div> <input class='field-signup' type='text' name='p4'><br />
-					<div class='label-signup'>Telefones</div> <textarea class='field-signup' name='p5'></textarea><br />
-					<div class='label-signup'>Endereços</div> <textarea class='field-signup' name='p6'></textarea><br />
+					<div >Nome</div> <input class='field' type='text' name='p1'>
+					<div >CREA</div> <input class='field' type='text' name='p2'><br />
+					<div >Cidade</div> <input class='field' type='text' name='p3'>
+					<div >Estado</div> <input class='field' type='text' name='p4'><br />
+					<div >Telefones</div> <textarea class='field' name='p5'></textarea>
+					<div >Endereços</div> <textarea class='field' name='p6'></textarea>
 				</fieldset>
 				<fieldset><pre> Configurações do Ambiente </pre>
-					<div class='label-signup'>Período de Notificação</div> <input class='field-signup' type='text' name='ca1'><br />
-					<div class='label-signup'>Disponibilidade</div> <input class='field-signup' type='text' name='ca2'><br />
-					<div class='label-signup'>Valor do metro²</div> <input class='field-signup' type='text' name='ca3'><br />
+					<div >Período de Notificação</div> <input class='field' type='text' name='ca1'><br />
+					<div >Disponibilidade</div> <input class='field' type='text' name='ca2'>
+					<div >Valor do metro²</div> <input class='field' type='text' name='ca3'>
 				</fieldset>
 				<fieldset><pre> Constantes </pre>
 				</fieldset>
@@ -90,7 +81,100 @@
 		</div>
 		$result
 	</body>
-</html>";
+</html>";*/
+    $screen = "
+<html>
+	<head>
+		<link type='text/css' rel='stylesheet' href='./css/global.css' />
+		<title>Solicitação de uso</title>
+    <style type='text/css'>
+    #apDiv1 {
+	position:absolute;
+	width:665px;
+	height:209px;
+	z-index:1;
+	left: -17px;
+	top: 114px;
+}
+    #apDiv2 {
+	position:absolute;
+	width:194px;
+	height:28px;
+	z-index:2;
+	left: 645px;
+	top: 125px;
+}
+    #apDiv3 {
+	position:absolute;
+	width:195px;
+	height:26px;
+	z-index:3;
+	left: 417px;
+	top: 247px;
+}
+    #apDiv4 {
+	position:absolute;
+	width:200px;
+	height:26px;
+	z-index:4;
+	left: 685px;
+	top: 247px;
+}
+    #apDiv5 {
+	position:absolute;
+	width:341px;
+	height:22px;
+	z-index:5;
+	left: 39px;
+	top: 19px;
+}
+    </style>
+	</head>
+<body>
+		<div id='maintenance'>
+			<form method='POST' action='./signup.php'>
+			    <div >
+			      <p>&nbsp;</p>
+			      <p>&nbsp;</p>
+			    </div>
+			    <div id='apDiv5'>
+			      E-mail
+			        <div id='apDiv1'> 
+			          <p>Nome
+  <input name='p1' type='text' size='40'>
+			            CREA 
+			            <input  type='text' name='p2'>
+			          </p>
+			          <p>		              &nbsp;&nbsp;Cidade
+			            <input type='text' name='p3'>
+			          &nbsp;&nbsp;&nbsp;&nbsp;Estado
+			          <input  type='text' name='p4'>
+			          </p>
+			          <p>			          Telefone
+			            <input name='p5' type='text' value=''>
+			          Endereço
+			          <input name='p6' type='text' value=''>
+			          </p>
+			          <p>&nbsp;</p>
+			          <p>Período de Notificação
+			            <input  type='text' name='ca1'>
+			          </p>			          
+                      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor do metro²
+			            <input  type='text' name='ca3'>
+			          </p>
+                  </div>
+		          <input  type='email' name='o1'>
+			    </div>
+				<fieldset>
+			  <pre> Dados do engenheiro 
+</pre>
+				  
+				<input class='button' type='submit' value='Solicitar Uso'>
+			</form>
+		</div>
+	</body>
+</html>	
+	";
 	#ob_end_clean();		
 	disconnect();
 	echo $screen;
