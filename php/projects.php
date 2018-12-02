@@ -19,7 +19,7 @@
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['project'], 
 											 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
-											 array("0", "500", "50", "10", "20", "20", "50", "10", "53", "0", "0"), 
+											 array("0", "500", "50", "10", "20", "20", "20", "10", "53", "0", "0"), 
 											 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 											 "./data_process.php",
 											 "project", 
@@ -37,7 +37,7 @@
 		    if ($rs == True){	
 				$section = $section . build_form($GLOBALS['fields_name']['project'], 
 												 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
-												 array("0", "500", "50", "10", "20", "20", "50", "10", "53", "0", "0"), 
+												 array("0", "500", "50", "10", "20", "20", "20", "10", "53", "0", "0"), 
 												 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 												 "./data_process.php", 
 												 "project", 
@@ -180,17 +180,18 @@
 										 null
 										);										
 	}else{
-		$sql = "select idproject,
-					   (select name 
-					      from person, 
-						       budget 
-					     where person.idperson = budget.idperson 
-						   and budget.idbudget = project.idproject) name,
-					   initial_date,
-					   final_date,
-					   value
-				  from project
-				 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
+		$sql = "select proj.idproject,
+					   p.name,
+					   proj.initial_date,
+					   proj.final_date,
+					   proj.value
+				  from project proj,
+					   person p,
+					   budget b
+				 where proj.iduser_integ = " . $_SESSION["iduser_integ"] . "
+				 and   proj.idbudget = b.idbudget
+				 and   b.idperson = p.idperson";
+				 
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if (($rs == True) and (mysqli_num_rows($rs) > 0)){	
 			$section = $section . build_grid(array("idproject", "name", "initial_date", "final_date", "value"), 
@@ -202,7 +203,7 @@
 											);
 		}
 	}
-	#ob_end_clean();		
+	ob_end_clean();		
 	load_base_page("Projetos", $page, $section);
 	disconnect();
 ?>

@@ -13,7 +13,6 @@
 		}
 		disconnect();
 	}
-
 	function insert_record(){
 		$sql = "select sequence('" . $_POST['page'] . "') as id";
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
@@ -33,22 +32,13 @@
 			if ($pos == 0){
 				$v__ = $v__ . $sequence['id'] . ", ";
 			} else {
-				if (($_POST[$field] == "") and ($field != 'path')){
+				if ($_POST[$field] == ""){
 					$v__ = $v__ . "null";
 				} else {
 					if ($GLOBALS['fields_type'][$_POST['page']][$pos] == "number"){
 						$v__ = $v__ . $_POST[$field];
 					} else if (($GLOBALS['fields_type'][$_POST['page']][$pos] == "varchar") or ($GLOBALS['fields_type'][$_POST['page']][$pos] == "date")){
-						if ($field == 'path'){
-							$file_absolute_path = "C:/xampp/htdocs/engsys_new/engsys/php/uploads/";
-							$file_relative_path = "'./uploads/".$_FILES['path']['name']."'";
-							$v__ = $v__ . "$file_relative_path";
-							echo "2";
-							
-						}else{
-							$v__ = $v__ . "'" . $_POST[$field] . "'";
-							echo "1";
-						}
+						$v__ = $v__ . "'" . $_POST[$field] . "'";
 					}
 				}
 				
@@ -60,7 +50,6 @@
 			
 		}
 		$sql = $sql . $f__ . ") values(" . $v__ . ")";
-		echo $sql;
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
 			echo "Registro inserido!";
@@ -130,18 +119,3 @@
 		}
 	}
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

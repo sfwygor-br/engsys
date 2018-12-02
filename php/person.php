@@ -17,13 +17,13 @@
 			$page = 'person';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['person'], 
-											 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", ""), 
-											 array("0", "50", "50", "10", "20", "20", "50", "10", "20", "20"), 
-											 array("hidden", "Text", "Text", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
+											 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "E-mail", "", "Cadastro", ""), 
+											 array("0", "50", "0", "10", "20", "30", "50", "10", "20", "20"), 
+											 array("hidden", "Text", "hidden", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
 											 "./data_process.php", 
 											 "person", 
 											 $x,
-											 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
+											 array("no", "yes", "no", "no", "yes", "yes", "no", "no", "no"),
 											 null,
 											 8,
 											 $_SESSION["iduser_integ"]
@@ -35,13 +35,13 @@
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){	
 				$section = $section . build_form($GLOBALS['fields_name']['person'], 
-												 array("Código", "Nome", "Nome Fantasia", "F/J", "CPF/CNPJ", "E-mail", "P", "Cadastro", ""), 
-												 array("0", "50", "50", "10", "20", "20", "50", "10", "20", "20"), 
-												 array("hidden", "Text", "Text", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
+												 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "E-mail", "", "Cadastro", ""), 
+												 array("0", "50", "0", "10", "20", "30", "50", "10", "20", "20"), 
+												 array("hidden", "Text", "hidden", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
 												 "./data_process.php", 
 												 "person", 
 												 $x,
-												 array("no", "yes", "yes", "no", "no", "yes", "no", "no", "no"),
+												 array("no", "yes", "no", "no", "yes", "yes", "no", "no", "no"),
 												 $rs,
 												 null,
 												 null,

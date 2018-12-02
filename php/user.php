@@ -49,17 +49,32 @@
 			};
 		};
 	}else{
-		$sql = "select iduser,
-					   username,
-					   email,
-					   case 
-					        when status = 0 then
-						        'ATIVO'
-                            else
-								'INATIVO'
-					    end status
-				  from user
-				 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
+		if ($_SESSION["iduser"] <> $_SESSION["iduser_integ"]){
+			$sql = "select iduser,
+						   username,
+						   email,
+						   case 
+								when status = 0 then
+									'ATIVO'
+								else
+									'INATIVO'
+							end status
+					  from user
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
+					   and iduser <> " . $_SESSION["iduser_integ"];
+		}else{
+			$sql = "select iduser,
+						   username,
+						   email,
+						   case 
+								when status = 0 then
+									'ATIVO'
+								else
+									'INATIVO'
+							end status
+					  from user
+					 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
+		}
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
 			$section = $section . build_grid(array("iduser", "username", "email", "status"), 

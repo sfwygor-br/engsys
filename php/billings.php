@@ -17,9 +17,9 @@
 			#$page = 'billing';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['billing'], 
-											 array("", "", "idevent", "idperson", "idproject", "Natureza", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
-											 array("0", "0", "1000", "1000", "1000", "150", "50", "50", "20", "50", "50"),
-											 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "billing_type", "date", "date", "text", "hidden", "hidden"), 
+											 array("", "", "idevent", "idperson", "idproject", "", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
+											 array("0", "0", "1000", "1000", "1000", "0", "50", "50", "20", "50", "50"),
+											 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "hidden", "date", "date", "text", "hidden", "hidden"), 
 											 "./data_process.php", 
 											 "billing", 
 											 $x,
@@ -35,10 +35,10 @@
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
 				$section = $section . build_form($GLOBALS['fields_name']['billing'], 
-												 array("", "", "idevent", "idperson", "idproject", "Natureza", "Data de Processamento", "Data de Vencimento", "Valor", "Data de Pagamento", "Valor Pago"),
-												 array("0", "0", "1000", "1000", "1000", "150", "50", "50", "20", "50", "20"),
-												 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "billing_type", "date", "date", "text", "date", "text"), 
-												 "./data_process.php", 
+												 array("", "", "idevent", "idperson", "idproject", "", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
+											 array("0", "0", "1000", "1000", "1000", "0", "50", "50", "20", "50", "50"),
+											 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "hidden", "date", "date", "text", "hidden", "hidden"), 
+											 "./data_process.php", 
 												 "billing", 
 												 $x,
 												 array("yes", "yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "no"),
@@ -52,7 +52,7 @@
 		$sql = "select b.idbilling,
 					   e.description,
 					   case 
-					        when b.type = 0 then
+					        when e.type = 0 then
 						        'ENTRADA'
                             else
 								'SAÍDA'

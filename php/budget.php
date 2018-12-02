@@ -23,7 +23,7 @@
 											 "./data_process.php", 
 											 "budget", 
 											 $x,
-											 array("yes", "no", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
+											 array("yes", "yes", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
 											 null,
 											 9,
 											 $_SESSION["iduser_integ"]
@@ -41,7 +41,7 @@
 												 "./data_process.php", 
 												 "budget", 
 												 $x,
-												 array("yes", "no", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
+												 array("yes", "yes", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
 												 $rs,
 												 9,
 												 null

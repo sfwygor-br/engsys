@@ -1,6 +1,6 @@
 ﻿<?php
 	function load_base_page($page_title, $page, $section){
-		ob_start();
+		#ob_start();
 		#ob_end_clean();
 		session_start();
 		if (in_array($page, array("phone", "adress", "person"))){
@@ -166,9 +166,6 @@
 					document.getElementById ('insert_btn').addEventListener('click', function(){
 						$.ajax({
 							type: 'POST',
-							enctype: 'multipart/form-data',
-							contentType: false, // desabilitar o cabeçalho 'Content-Type'
-							processData: false, // impedir que o jQuery tranforma a 'data' em querystring
 							url: './data_process.php',
 							data: $('#form').serialize()+'&action=insert&page=$page',
 							success:function(data) {
@@ -235,6 +232,22 @@ mostreFeedback();	)*/
 						}
 					});
 				};
+				
+				i = document.getElementById('billing-filter-container-header');
+				if (i != null){
+					$('#billing-filter-container-header').click(function(){
+						if ( $('#billing-filter-container').css('visibility') == 'hidden' )
+							$('#billing-filter-container').css('visibility','visible');
+					  else
+						$('#billing-filter-container').css('visibility','hidden');
+					});					
+				};
+				
+				$('#billing-filter-container-header').hover(function() {
+					$(this).css('cursor','pointer');
+				}, function() {
+					$(this).css('cursor','auto');
+				});
 				
 				$('#logout').hover(function() {
 					$(this).css('cursor','pointer');

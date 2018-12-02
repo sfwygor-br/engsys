@@ -19,7 +19,7 @@
 	</tr>";
 	
 		$content = "";
-		$aux  = "<a href='$link_adress";
+		$aux  = "<a class='a-nav' href='$link_adress";
 		$aux2 = "</a>";
 		$i = 1;
 		while($r = mysqli_fetch_assoc($recordset)){
@@ -52,7 +52,7 @@
 			foreach($fields_name as $field){
 				if (!empty($link) and (strtoupper($field) == strtoupper($key_field[0]))){
 					$content = $content . "
-		<td>". $aux . "&" .$link . "&sql_macro=" . $sql_macro . "'>" . $r[$field] . $aux2 ."</td>";
+		<td class='td-link'>". $aux . "&" .$link . "&sql_macro=" . $sql_macro . "'>" . $r[$field] . $aux2 ."</td>";
 				}else{
 				$content = $content . "
 		<td>".$r[$field]."</td>";
@@ -118,7 +118,7 @@
 		
 		function person_type($field, $selected){
 			$x = "
-		<select name='$field' class='field'>";
+		Tipo de Pessoa <select name='$field' class='field'>";
 			if ($selected == '0'){
 				$x = $x."
 			<option value='0' selected> Física </option>
@@ -137,10 +137,10 @@
 		
 		function person_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		Filtro de pessoa <select name='$field' class='field' style='width: 100%;'>";
 		    if (!isset($selected)){
 				$x = $x . "
-				<option value='null' selected> Selecione o Cliente </option>
+				<option value='null' selected> Selecione a pessoa </option>
 				";
 			};
 			
@@ -165,7 +165,7 @@
 		
 		function person_provider($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		Filtro de prestadores de serviço <select name='$field' class='field' style='width: 100%;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione Prestador de Serviços </option>
@@ -176,7 +176,7 @@
 						   name
 			          from person
 					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
-					   and provider = 1
+					   and provider = 0
 					order by name desc";
 			connect();
 			echo $sql;
@@ -195,7 +195,7 @@
 		
 		function event_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		Filtro de eventos <select name='$field' class='field' style='width: 100%;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione o Evento </option>
@@ -223,7 +223,7 @@
 		
 		function project_filter($field, $selected, $size){
 			$x = "
-		<select name='$field' class='field' style='width: 100%;'>";
+		Filtro de projetos <select name='$field' class='field' style='width: 100%;'>";
 		    if (!isset($selected)){
 				$x = $x . "
 				<option value='null' selected> Selecione o Projeto </option>
@@ -263,7 +263,7 @@
 			}
 			
 			$sql = "select idbudget,
-						   concat('Início: ',initial_date,', Término: ',final_date,', Cliente: ',(select substr(person.name, 0, 400) from person where person.idperson = budget.idperson)) as description
+						   concat('Início: ',initial_date,', Término: ',final_date,', Cliente: ',(select person.name from person where person.idperson = budget.idperson)) as description
 			          from budget
 					 where iduser_integ = " . $_SESSION["iduser_integ"] . "
 					order by description desc";
@@ -324,6 +324,9 @@
 					$form = $form . person_filter($fields_name[$pos], null, $field_size[$pos]);
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
+					if ($field_type[$pos] =="provider_type"){
+						$form = $form . "Prestador ";
+					};
 					$form = $form . yesno($fields_name[$pos], '1');
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="status")){
@@ -336,7 +339,7 @@
 					$form = $form.
 	"<br />
 	<br />
-	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' cols='".$field_size[$pos]."' rows='50' name='".$fields_name[$pos]."'></textarea>";
+	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' style='width: 100%' rows='50' name='".$fields_name[$pos]."'></textarea>";
 					$pos = $pos + 1;					
 				}else{		
 				    $aux = "";
@@ -365,7 +368,7 @@
 					$form = $form . person_provider($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="project_filter")){
-					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
+					$form = $form . project_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="budget_filter")){
 					$form = $form . budget_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
@@ -377,6 +380,9 @@
 					$form = $form . person_filter($fields_name[$pos], $r[$fields_name[$pos]], $field_size[$pos]);
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
+					if ($field_type[$pos] =="provider_type"){
+						$form = $form . "Prestador ";
+					};
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="status")){
@@ -389,7 +395,7 @@
 					$form = $form.
 	"<br />
 	<br />
-	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' cols='".$field_size[$pos]."' rows='50' name='".$fields_name[$pos]."'>". $r[$fields_name[$pos]]."</textarea>";
+	<label> " . $placeholder[$pos] . "</label><br /> <textarea class='field' style='width: 100%' rows='50' name='".$fields_name[$pos]."'>". $r[$fields_name[$pos]]."</textarea>";
 					$pos = $pos + 1;					
 				}else{
 				/*	

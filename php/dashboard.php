@@ -16,6 +16,7 @@ select 'orange' as color,
  where 1 = 1
    and b.iduser_integ = ".$_SESSION["iduser_integ"]."
    and b.iduser_integ = c.iduser_integ
+   and (round(curdate()+c.notification_period) >= b.maturity_date)
 union all
 select 'yellow' as color,
        concat('Projetos com prazos a vencer/vencidos: ', date_format(b.final_date, '%d %m %y')) as notification,
@@ -25,18 +26,21 @@ select 'yellow' as color,
  where 1 = 1
    and b.iduser_integ = ".$_SESSION["iduser_integ"]."
    and b.iduser_integ = c.iduser_integ
+   and (round(curdate()+c.notification_period) >= b.final_date)
 union all
 select 'purple' as color,
-       concat('Etapas de projetos com prazos a vencer/vencidos: ', date_format(b.final_date, '%d %m %y')) as notification,
-	   concat('./projects.php?action=PROJECTSTAGEUPDATE&sql_macro=',b.idproject,' and idproject_stage = ', b.idproject_stage, ' and idproject = ', b.idproject) as link
-  from project_stage b,
+       concat('Etapas de projetos com prazos a vencer/vencidos: ', date_format(ps.final_date, '%d %m %y')) as notification,
+	   concat('./projects.php?action=PROJECTSTAGEUPDATE&sql_macro=',ps.idproject,' and idproject_stage = ', ps.idproject_stage, ' and idproject = ', ps.idproject) as link
+  from project_stage ps,
        configuration c,
 	   project p
  where 1 = 1
    and p.iduser_integ = ".$_SESSION["iduser_integ"]."
-   and p.idproject      = b.idproject
-   and p.iduser_integ = c.iduser_integ;
+   and p.idproject      = ps.idproject
+   and p.iduser_integ = c.iduser_integ
+   and (round(curdate()+c.notification_period) >= ps.final_date);
 	"; #b.maturity_date >= round(now() + c.notification_period)
+	echo $sql;
 	$section = "
 			<div id='notif'>
 				<div id='notif-msg-container'>
@@ -675,6 +679,6 @@ select tmp.*
 	";
 	
 	
-	ob_end_clean();
+	#ob_end_clean();
 	load_base_page("Dashboard", "dashboard", $section);
 ?>
