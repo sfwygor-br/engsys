@@ -40,7 +40,7 @@ select 'purple' as color,
    and p.iduser_integ = c.iduser_integ
    and (round(curdate()+c.notification_period) >= ps.final_date);
 	"; #b.maturity_date >= round(now() + c.notification_period)
-	echo $sql;
+	#echo $sql;
 	$section = "
 			<div id='notif'>
 				<div id='notif-msg-container'>
@@ -679,6 +679,6 @@ select tmp.*
 	";
 	
 	
-	#ob_end_clean();
+	ob_end_clean();
 	load_base_page("Dashboard", "dashboard", $section);
 ?>

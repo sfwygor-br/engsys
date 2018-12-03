@@ -8,7 +8,7 @@
 	connect();
 	$page = 'billing';
 	if ($action == ""){
-		$section = "<div id='new-reg' onclick='location=\"./billings.php?action=INSERT\"'>Novo</div>";
+		$section = "<div id='billings-update' onclick='location=\"./billings_update.php?action=and payment_date is not null\"'>Contas a baixar/cancelar</div><div id='new-reg' onclick='location=\"./billings.php?action=INSERT\"'>Novo</div>";
 	}
 	
 	if (($action == 'INSERT') or ($action == 'UPDATE')){

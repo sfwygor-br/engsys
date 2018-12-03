@@ -293,6 +293,12 @@ mostreFeedback();	)*/
 					$(this).css('cursor','auto');
 				});
 				
+				$('#billings-update').hover(function() {
+					$(this).css('cursor','pointer');
+				}, function() {
+					$(this).css('cursor','auto');
+				});
+				
 				$(window).resize(function() {
 					$('body').css('display', 'none');
 				});

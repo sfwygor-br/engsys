@@ -14,7 +14,7 @@
 		if((!empty($user)) and (!empty($password))){
 			#echo"<script>alert($user+$password)</script>";
 			$sql = "select * from user where upper(username) = '$user' and upper(password) = '$password'";
-			echo $sql;
+			#echo $sql;
 			$rs  = mysqli_query($GLOBALS['conn'], $sql);
 			if ($rs == True){			
 				if (mysqli_num_rows($rs) == 1) {

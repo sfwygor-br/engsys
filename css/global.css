@@ -177,6 +177,18 @@ pre{
 	margin-right: 30px;
 }
 
+#billings-update{
+	width: 200px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-weight: bold;
+	background-color: #3a4858;
+	color: white;
+	float: right;
+	margin-right: 30px;
+}
+
 .green-dot{
 	width: 10px;
 	height: 10px;

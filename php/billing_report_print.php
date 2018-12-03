@@ -1,4 +1,5 @@
 ﻿<?php
+	session_start();
 	$aux0 = "";
 	$aux1 = "";
 	$aux2 = "";
@@ -17,10 +18,7 @@
 	};
 	
 	if ($_POST["type"] != ''){
-		$aux0 = $aux0 . ", event e ";
-		$aux5 = $aux5 . ", e.*";
-		$aux2 = "   and e.type = ".$_POST["type"]."
-		            and e.idevent = b.idevent";
+		$aux2 = "   and e.type = ".$_POST["type"];
 	}
 	
 	if ($_POST["project"] != ''){
@@ -37,14 +35,88 @@
 		           and b.idperson = ".$_POST["person"]."";
 	}
 	
-	$sql = "select b.*
-	               $aux5
-	          from billing b
-			       $aux0
-			 where 1 = 1
-			 $aux1
-			 $aux2
-			 $aux3
-			 $aux4";
-	echo $sql;
+	$sql = "
+select b.idbilling,
+       b.processing_date,
+       b.maturity_date,
+       b.payment_date,
+       b.value,
+       b.value_payed,
+       concat(e.idevent, '  ', e.description) as event,
+       case when e.type = 0 then 
+           'SAÌDA'
+       else 
+           'ENTRADA'
+       end as billing_type,
+       sum(b.value) as value_total,
+       sum(b.value_payed) as value_payed_total,
+	   param.*
+  from billing b,
+       event e,
+	   parameter param
+ where 1 = 1
+   and b.idevent = e.idevent
+   and param.iduser_integ = ".$_SESSION["iduser_integ"]."
+   and param.iduser_integ = b.iduser_integ
+   $aux1
+   $aux2
+   $aux3
+   $aux4";
+  
+	include("connection.php");
+	connect();
+	$aux6 = "";
+	$value_total = 0;
+	$rs = mysqli_query($GLOBALS["conn"], $sql);
+	$value_payed_total = 0;
+	
+	while($r = mysqli_fetch_assoc($rs)){
+		$engineer_name = $r["engineer_name"];
+		$crea = $r["CREA"];
+		$city = $r["city"];
+		$state = $r["state"];
+		$phones = $r["phones"];
+		$adresses = $r["adresses"];
+		$aux6 = $r["event"]." - ".$r["type"]." - ".$r["value"]." - ".$r["value_payed"]." - ".$r["processing_date"]." - ".$r["payment_date"]." - ".$r["maturity_date"]." - <br>";
+	}
+	disconnect();
+	
+	$screen = "
+<html>
+	<head>
+		<link rel='stylesheet' type='text/css' href='../css/report.css'>
+		<title> Relatório de contas </title>
+	</head>
+	<body>
+		<div id='main'>
+			<div id='header'>
+				<div id='engineer-data'>
+					<div class='title'>Engenheiro:<br>
+											 CREA:<br>
+										   Cidade:<br>
+										   Estado:<br>
+										 Telefone:<br>
+										 Endereço:
+					</div>
+				</div>
+				<div id='engineer-data-rs'>
+					&nbsp;$engineer_name<br>
+					&nbsp;$crea<br>
+					&nbsp;$city<br>
+					&nbsp;$state<br>
+					&nbsp;$phones<br>
+					&nbsp;$adresses<br>
+				</div>
+			</div>
+			<div id='body'>
+			    $aux6
+			</div>
+		</div>
+	</body>
+</html>
+";
+echo $screen;	
+	
+	
+	
 ?>

@@ -1,0 +1,35 @@
+﻿#main{
+	width: 90%;
+	height: 90%;
+	margin: 0px auto;
+	border: solid 1px;
+}
+
+#header{
+	font-size: 16pt;
+}
+
+.title{
+	color: black;
+	font-weight: bold;
+}
+
+#engineer-data{
+	width: 200px;
+	float: left;
+	text-align: right;
+	clear:both;
+	z-index: 1;
+}
+
+#engineer-data-rs{
+	width: 60%;
+	float: left;
+	text-align: left;
+	z-index: 2;
+}
+
+#body{
+	float: left;
+	clear: both;
+}
