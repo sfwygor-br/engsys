@@ -67,8 +67,18 @@ select b.idbilling,
 	connect();
 	$aux6 = "";
 	$value_total = 0;
-	$rs = mysqli_query($GLOBALS["conn"], $sql);
 	$value_payed_total = 0;
+	$rs = mysqli_query($GLOBALS["conn"], $sql);
+	
+	$aux6 = $aux6 . "<br>
+	         <br><div style='text-align: center;'>
+	             <div class='title' style='width:600px; height:20px; overflow: hidden; float: left; margin-left: 50px;'>Evento
+		         </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Natureza
+				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Valor
+				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Valor Pago
+				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Processamento
+				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Pagamento
+				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Vencimento</div></div><br>";
 	
 	while($r = mysqli_fetch_assoc($rs)){
 		$engineer_name = $r["engineer_name"];
@@ -77,9 +87,23 @@ select b.idbilling,
 		$state = $r["state"];
 		$phones = $r["phones"];
 		$adresses = $r["adresses"];
-		$aux6 = $r["event"]." - ".$r["type"]." - ".$r["value"]." - ".$r["value_payed"]." - ".$r["processing_date"]." - ".$r["payment_date"]." - ".$r["maturity_date"]." - <br>";
+		$aux6 = $aux6 . "<div style='width:600px; height:20px; overflow: hidden; float: left; margin-left: 50px;'>".$r["event"].
+		        "</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["type"].
+				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value"].
+				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value_payed"].
+				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["processing_date"].
+				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["payment_date"].
+				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["maturity_date"]."</div><br>";
+		$value_total = $r["value_total"];
+		$value_payed_total = $r["value_payed_total"];
 	}
 	disconnect();
+	$aux6 = $aux6 . "
+		<div style='float: right; margin-right: 10px; margin-top: 20%; clear:both;'>
+			<div class='title'>Total: $value_total<br>
+			                   Total Pago: $value_payed_total</div>
+		</div>
+	";
 	
 	$screen = "
 <html>

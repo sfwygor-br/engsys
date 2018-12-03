@@ -1,8 +1,9 @@
 ﻿#main{
 	width: 90%;
-	height: 90%;
+	height: 145px;
 	margin: 0px auto;
 	border: solid 1px;
+	height: inherited;
 }
 
 #header{
@@ -30,6 +31,9 @@
 }
 
 #body{
+	width: 100%;
 	float: left;
 	clear: both;
+	min-height: 500px;
+	border: solid 1px;
 }
