@@ -29,8 +29,8 @@
 	$GLOBALS['fields_name']['attachment'] 		= array("idattachment", "idproject", "description", "path");
 	$GLOBALS['fields_type']['attachment']		= array("number", "number", "varchar", "varchar");
 	
-	$GLOBALS['fields_name']['operation'] 		= array("idoperation", "idproject");
-	$GLOBALS['fields_type']['operation'] 		= array("number", "number");
+	$GLOBALS['fields_name']['operation'] 		= array("idoperation", "idproject", "insert_date", "result");
+	$GLOBALS['fields_type']['operation'] 		= array("number", "number", "date", "varchar");
 	
 	#for data process only
 	$GLOBALS['is_key']['person'] 				= array("yes", "no", "no", "no", "no", "no", "no", "no", "no");
