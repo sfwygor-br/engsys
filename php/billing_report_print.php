@@ -61,7 +61,8 @@ select b.idbilling,
    $aux1
    $aux2
    $aux3
-   $aux4";
+   $aux4
+   group by b.idbilling";
   
 	include("connection.php");
 	connect();
@@ -70,15 +71,19 @@ select b.idbilling,
 	$value_payed_total = 0;
 	$rs = mysqli_query($GLOBALS["conn"], $sql);
 	
+	if (mysqli_num_rows($rs) <= 0) {
+		echo"<script> alert('A consulta não retornou dados.'); location='./reports.php';</script>";
+	}
+	
 	$aux6 = $aux6 . "<br>
 	         <br><div style='text-align: center;'>
 	             <div class='title' style='width:600px; height:20px; overflow: hidden; float: left; margin-left: 50px;'>Evento
 		         </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Natureza
 				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Valor
 				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Valor Pago
-				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Processamento
-				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Pagamento
-				 </div> <div class='title' style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Vencimento</div></div><br>";
+				 </div> <div class='title' style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Processamento
+				 </div> <div class='title' style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Pagamento
+				 </div> <div class='title' style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>Data Vencimento</div><br>";
 	
 	while($r = mysqli_fetch_assoc($rs)){
 		$engineer_name = $r["engineer_name"];
@@ -91,14 +96,15 @@ select b.idbilling,
 		        "</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["type"].
 				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value"].
 				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value_payed"].
-				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["processing_date"].
-				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["payment_date"].
-				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["maturity_date"]."</div><br>";
+				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["processing_date"].
+				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["payment_date"].
+				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["maturity_date"]."</div><br>";
 		$value_total = $r["value_total"];
 		$value_payed_total = $r["value_payed_total"];
 	}
 	disconnect();
 	$aux6 = $aux6 . "
+	    </div>
 		<div style='float: right; margin-right: 10px; margin-top: 20%; clear:both;'>
 			<div class='title'>Total: $value_total<br>
 			                   Total Pago: $value_payed_total</div>

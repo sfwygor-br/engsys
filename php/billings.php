@@ -11,9 +11,27 @@
 		$section = "<div id='billings-update' onclick='location=\"./billings_update.php?action=and payment_date is not null\"'>Contas a baixar/cancelar</div><div id='new-reg' onclick='location=\"./billings.php?action=INSERT\"'>Novo</div>";
 	}
 	
-	if (($action == 'INSERT') or ($action == 'UPDATE')){
-		
-		if ($action == 'INSERT'){
+	if (($action == 'INSERT') or ($action == 'UPDATE') or ($action == 'ALTERSTATUS')){
+		if ($action == 'ALTERSTATUS'){
+			#$page = 'billing';
+			$x = 'alterstatus';
+			$sql = "Select * from billing where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
+			$rs  = mysqli_query($GLOBALS["conn"], $sql);
+		    if ($rs == True){
+				$section = $section . build_form($GLOBALS['fields_name']['billing'], 
+												 array("", "", "", "", "", "", "", "", "Data de Pagamento", "Valor Pago"),
+											     array("0", "0", "0", "0", "0", "0", "0", "0", "50", "20"),
+											     array("hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "date", "text"), 
+											     "./data_process.php", 
+												 "billings_update", 
+												 $x,
+												 array("yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "yes"),
+												 $rs,
+												 null,
+												 null
+												);																							  
+			};
+		}else if ($action == 'INSERT'){
 			#$page = 'billing';
 			$x = 'insert';
 			$section = $section . build_form($GLOBALS['fields_name']['billing'], 
@@ -36,9 +54,9 @@
 		    if ($rs == True){
 				$section = $section . build_form($GLOBALS['fields_name']['billing'], 
 												 array("", "", "idevent", "idperson", "idproject", "", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
-											 array("0", "0", "1000", "1000", "1000", "0", "50", "50", "20", "50", "50"),
-											 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "hidden", "date", "date", "text", "hidden", "hidden"), 
-											 "./data_process.php", 
+											     array("0", "0", "1000", "1000", "1000", "0", "50", "50", "20", "50", "50"),
+											     array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "hidden", "date", "date", "text", "hidden", "hidden"), 
+											     "./data_process.php", 
 												 "billing", 
 												 $x,
 												 array("yes", "yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "no"),
@@ -58,11 +76,9 @@
 								'SAÍDA'
 					    end type
 				  from billing b,
-				       event e,
-					   person p
+				       event e
 				 where b.iduser_integ = " . $_SESSION["iduser_integ"] . "
-				   and e.idevent = b.idevent
-				   and p.idperson = b.idperson";
+				   and e.idevent = b.idevent";
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
 			$section = $section . build_grid(array("idbilling", "description", "type"), 

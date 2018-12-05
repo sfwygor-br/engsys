@@ -46,10 +46,10 @@
 	};
 	$filter2 = $filter2 . "</select>";
 	
-	$sql = "select 0 value,
+	$sql = "select 1 value,
 	               'Saída' description
 		    union
-			select 1 value,
+			select 0 value,
 				   'Entrada' description";
 	$filter3 = "<select name='type' class='field' style='width: 100%;'>
 			<option value='' selected>Natureza - Não obrigatório</option>";
@@ -59,7 +59,8 @@
 		";
 	};
 	$filter3 = $filter3 . "</select>";
-		
+	
+	$curdate = date('Y-m-d');
 	
 	$section = "
 	
@@ -69,7 +70,7 @@
 		<div id='billing-filter-container'>
 			<form name='form' action='./billing_report_print.php' method='POST'>
 				<p>
-					Período de: <input type='date' name='dini' class='field' id='req_f_1' required> á <input type='date' name='dend' class='field' id='req_f_2' required>
+					Período de: <input type='date' name='dini' class='field' id='req_f_1' value='$curdate' required> á <input type='date' name='dend' class='field' id='req_f_2' value='$curdate' required>
 				</p>
 				<p>
 					<fieldset> Tipo de filtragem <br>

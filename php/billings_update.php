@@ -29,7 +29,8 @@
 		";
 		
 	$sql = "select b.*,
-                   (select description from event e where e.idevent = b.idevent) as event	     
+                   (select description from event e where e.idevent = b.idevent) as event,
+                   concat(' and idbilling = ', idbilling) as sql_macro				   
 	          from billing b
 			 where 1 = 1
 			   $action
@@ -48,13 +49,13 @@
 				<td>".$r["idbilling"]."</td>
 				<td>".$r["event"]."</td>
 				<td>".$r["value"]."</td>
-				<td>Baixar</td>
+				<td><a href='./billings.php?action=ALTERSTATUS&sql_macro=".$r["sql_macro"]."'>Baixar</a></td>
 			</tr>
 		";
 	}
 	$section = $section . "</table>";
 	
 	ob_end_clean();		
-	load_base_page("Contas", $page, $section);
+	load_base_page("Baixa/Cancelamento de Baixas", $page, $section);
 	disconnect();
 ?>

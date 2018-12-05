@@ -357,7 +357,7 @@
 				$pos = $pos + 1;
 				}
 			}
-		}else if ($action == 'update'){
+		}else if (($action == 'update') or ($action == 'alterstatus')){
 			$r = mysqli_fetch_assoc($recordset);
 			$pos = 0;
 			foreach ($fields_name as $field){
@@ -441,6 +441,8 @@
 			$aux = "<p><input class='button' type='button' value='Gravar' id='insert_btn'><input class='button' type='button' value='Cancelar' id='cancel_btn' onclick='location=\"./".$page_aux.".php\"'>";
 		}else if ($action == 'update'){
 			$aux = "<p><input class='button' type='button' value='Salvar' id='update_btn'><input class='button' type='button' value='Excluir' id='delete_btn'><input class='button' type='button' value='Cancelar' id='cancel_btn' onclick='location=\"./".$page_aux.".php\"'>";
+		}else if ($action == 'alterstatus'){
+			$aux = "<p><input class='button' type='button' value='Salvar' id='update_btn'><input class='button' type='button' value='Cancelar' id='cancel_btn' onclick='location=\"./".$page_aux.".php\"'>";
 		}
 		$form = $form.
 	"

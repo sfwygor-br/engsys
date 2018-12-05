@@ -67,7 +67,7 @@ select 'purple' as color,
 	$plot -> SetTitle("Totais: Orcamentos e projetos anual");
 	$plot -> SetXTitle("Periodo");
 	$plot -> SetYTitle("Quantidade");
-	$plot -> SetPrecisionY(1);
+	$plot -> SetPrecisionY(0);
 	$plot -> SetPlotType("bars");
 	$sql = "
 select tmp.*
@@ -447,73 +447,73 @@ select tmp.*
               (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 1
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jan,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 2
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") feb,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 3
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") mar,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 4
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") apr,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 5
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") may,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 6
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jun,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(maturity_date) = 7
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jul,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 8
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") aug,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(maturity_date) = 9
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") sep,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 10
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") oct,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 11
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") nov,
 
                (select coalesce(sum(value), 0)
                  from billing
                 where month(maturity_date) = 12
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") dec_
       )tmp
 union all
@@ -524,73 +524,73 @@ select tmp.*
               (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 1
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jan,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 2
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") feb,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 3
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") mar,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 4
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") apr,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 5
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") may,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 6
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jun,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 7
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") jul,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 8
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") aug,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 9
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") sep,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 10
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") oct,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 11
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") nov,
 
                (select coalesce(sum(value_payed), 0)
                  from billing
                 where month(payment_date) = 12
-				  and type = 0
+				  and (select e.type from event e where e.idevent = billing.idevent) = 0
 				  and iduser_integ = ".$_SESSION["iduser_integ"].") dec_
       )tmp
 	";

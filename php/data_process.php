@@ -36,7 +36,11 @@
 					$v__ = $v__ . "null";
 				} else {
 					if ($GLOBALS['fields_type'][$_POST['page']][$pos] == "number"){
-						$v__ = $v__ . $_POST[$field];
+						$integer_aux = 0;
+						if ($_POST[$field] != ''){
+							$integer_aux = $_POST[$field];
+						}
+						$v__ = $v__ . $integer_aux;
 					} else if (($GLOBALS['fields_type'][$_POST['page']][$pos] == "varchar") or ($GLOBALS['fields_type'][$_POST['page']][$pos] == "date")){
 						$v__ = $v__ . "'" . $_POST[$field] . "'";
 					}
@@ -49,7 +53,7 @@
 			$pos = $pos + 1;
 			
 		}
-		$sql = $sql . $f__ . ") values(" . $v__ . ")";
+		$sql = $sql . $f__ . ") values(" . strtoupper($v__) . ")";
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
 			echo "Registro inserido!";
@@ -65,9 +69,13 @@
 		foreach($GLOBALS['fields_name'][$_POST['page']] as $field){
 			$sql = $sql . $field . " = ";
 			if ($GLOBALS['fields_type'][$_POST['page']][$pos] == "number"){
-				$sql = $sql . $_POST[$field];
+				$integer_aux = 0;
+				if ($_POST[$field] != ''){
+					$integer_aux = $_POST[$field];
+				}
+				$sql = $sql . $integer_aux;
 			} else if (($GLOBALS['fields_type'][$_POST['page']][$pos] == "varchar") or ($GLOBALS['fields_type'][$_POST['page']][$pos] == "date")){
-				$sql = $sql . "'" . $_POST[$field] . "'";
+				$sql = $sql . "'" . strtoupper($_POST[$field]) . "'";
 			}
 			if ($field != $lastelement){
 				$sql = $sql . ", ";
@@ -89,7 +97,6 @@
 			}
 			$pos = $pos + 1;
 		}
-		
 		$rs = mysqli_query($GLOBALS['conn'], $sql);
 		if ($rs == True){
 			echo "Registro atualizado!";

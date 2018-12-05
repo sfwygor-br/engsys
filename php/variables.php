@@ -17,8 +17,8 @@
 	$GLOBALS['fields_name']['event'] 			= array("idevent", "iduser_integ", "description", "type");
 	$GLOBALS['fields_type']['event'] 			= array("number", "number", "varchar", "number");
 	
-	$GLOBALS['fields_name']['billing'] 			= array("idbilling", "iduser_integ", "idevent", "idperson", "idproject", "type", "processing_date", "maturity_date", "value", "payment_date", "value_payed");
-	$GLOBALS['fields_type']['billing'] 			= array("number", "number", "number", "number", "number", "number", "date", "date", "number", "date", "number");
+	$GLOBALS['fields_name']['billing'] 			= array("idbilling", "iduser_integ", "idevent", "idperson", "idproject", "processing_date", "maturity_date", "value", "payment_date", "value_payed");
+	$GLOBALS['fields_type']['billing'] 			= array("number", "number", "number", "number", "number", "date", "date", "number", "date", "number");
 	
 	$GLOBALS['fields_name']['project'] 			= array("idproject", "idbudget", "expected_initial_date", "expected_final_date", "initial_date", "final_date", "area", "value", "description", "iduser_integ");
 	$GLOBALS['fields_type']['project'] 			= array("number", "number", "date", "date", "date", "date", "varchar", "varchar", "varchar", "number");
@@ -39,7 +39,7 @@
 	$GLOBALS['is_key']['user']					= array("yes", "no", "no", "no", "no", "no", "yes");
 	$GLOBALS['is_key']['budget']				= array("yes", "yes", "no", "no", "no", "no", "no", "no", "no", "yes");
 	$GLOBALS['is_key']['event'] 				= array("yes", "yes", "no", "no");
-	$GLOBALS['is_key']['billing'] 				= array("yes", "yes", "no", "no", "no", "no", "no", "no", "no", "no", "no");
+	$GLOBALS['is_key']['billing'] 				= array("yes", "yes", "no", "no", "no", "no", "no", "no", "no", "no");
 	$GLOBALS['is_key']['project'] 				= array("yes", "no", "no", "no", "no", "no", "no", "no", "no", "yes");
 	$GLOBALS['is_key']['project_stage'] 		= array("yes", "yes", "no", "no", "no", "no", "no", "no");
 	$GLOBALS['is_key']['attachment'] 			= array("yes", "yes", "no", "no");
