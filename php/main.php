@@ -117,6 +117,7 @@
 					<a href='./maintenance.php' class='a-nav'><div class='div-a-nav'>Manutenções</div></a>
 					<a href='./user.php' class='a-nav'><div class='div-a-nav'>Usuários</div></a>
 					<a href='./reports.php' class='a-nav-active'><div class='div-a-nav-active'>Relatórios</div></a>";
+					$comp = "<link type='text/css' rel='stylesheet' href='../css/report.css' />";
 			};
 		};
 		
@@ -236,10 +237,10 @@ mostreFeedback();	)*/
 				i = document.getElementById('billing-filter-container-header');
 				if (i != null){
 					$('#billing-filter-container-header').click(function(){
-						if ( $('#billing-filter-container').css('visibility') == 'hidden' )
-							$('#billing-filter-container').css('visibility','visible');
+						if ( $('#billing-filter-container').css('display') == 'none' )
+							$('#billing-filter-container').css('display','block');
 					  else
-						$('#billing-filter-container').css('visibility','hidden');
+						$('#billing-filter-container').css('display','none');
 					});					
 				};
 				
@@ -248,6 +249,39 @@ mostreFeedback();	)*/
 				}, function() {
 					$(this).css('cursor','auto');
 				});
+				
+				i = document.getElementById('operation-filter-container-header');
+				if (i != null){
+					$('#operation-filter-container-header').click(function(){
+						if ( $('#operation-filter-container').css('display') == 'none' )
+							$('#operation-filter-container').css('display','block');
+					  else
+						$('#operation-filter-container').css('display','none');
+					});					
+				};
+				
+				$('#operation-filter-container-header').hover(function() {
+					$(this).css('cursor','pointer');
+				}, function() {
+					$(this).css('cursor','auto');
+				});
+				
+				i = document.getElementById('ps-filter-container-header');
+				if (i != null){
+					$('#ps-filter-container-header').click(function(){
+						if ( $('#ps-filter-container').css('display') == 'none' )
+							$('#ps-filter-container').css('display','block');
+					  else
+						$('#ps-filter-container').css('display','none');
+					});					
+				};
+				
+				$('#ps-filter-container-header').hover(function() {
+					$(this).css('cursor','pointer');
+				}, function() {
+					$(this).css('cursor','auto');
+				});
+				
 				
 				$('#logout').hover(function() {
 					$(this).css('cursor','pointer');

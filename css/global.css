@@ -247,17 +247,5 @@ pre{
 	margin-left: 3px;
 }
 
-#billing-filter-container{
-	width: 750px;
-	visibility: hidden;
-}
 
-#billing-filter-container-header{
-	width: 750px;
-	height: 50px;
-	background-color: #3a4858;
-	line-height: 50px;
-	color: white;
-	font-weight: bold;
-}
 	

@@ -47,7 +47,7 @@
 			$sql = "select username, password, iduser_integ from user where iduser_integ = ".$id["iduser_integ"];
 			$rs = mysqli_query($GLOBALS["conn"], $sql);
 			$data = mysqli_fetch_assoc($rs);
-			
+			$headers = "From: naoresponda@engsys.com" . "\r\n";
 			$email_body = "
 			Olá ".$_POST["p1"].", você acabou de solicitar acesso ao sistema de genrenciamento de projetos ENGSYS.
 			Abai estão listados informações importantes sobre a sua conta, para sua segurança, pedimos que ao acessar o sistema pela primeira vez, você realize a troca de seu nome de usuário e senha.
@@ -59,11 +59,11 @@
 			Att, Equipe ENGSYS.
 			";
 			
-			mail($_POST["o1"], "ENGSYS - Solicitação de Uso", $email_body, "naoresponda@engsys.com");
+			mail($_POST["o1"], "ENGSYS - Solicitação de Uso", $email_body, $headers, "naoresponda@engsys.com");
 			
 			
 		}else{
-			$result = "<script>alert(\"".mysqli_error($GLOBALS['conn'])."\")</script>";
+			#$result = "<script>alert(\"".mysqli_error($GLOBALS['conn'])."\")</script>";
 		}
 	}
 	
@@ -91,7 +91,7 @@
 				<input class='button' type='submit' value='Salvar'>
 			</form>
 		</div>
-		$result
+		
 	</body>
 </html>";
 	#ob_end_clean();		

@@ -17,18 +17,18 @@
 		           and date_format(b.payment_date, '%y %m %d') <= date_format('".$_POST["dend"]."', '%y %m %d')";
 	};
 	
-	if ($_POST["type"] != ''){
+	if (@$_POST["type"] != ''){
 		$aux2 = "   and e.type = ".$_POST["type"];
 	}
 	
-	if ($_POST["project"] != ''){
+	if (@$_POST["project"] != ''){
 		$aux0 = $aux0 . ", project proj";
 		$aux5 = $aux5 . ", proj.*";
 		$aux3 = "  and proj.idproject = b.idproject
 		           and proj.idproject = ".$_POST["project"]."";
 	}
 	
-	if ($_POST["person"] != ''){
+	if (@$_POST["person"] != ''){
 		$aux0 = $aux0 . ", person p";
 		$aux5 = $aux5 . ", p.*";
 		$aux4 = "  and p.idperson = b.idperson
@@ -43,8 +43,8 @@ select b.idbilling,
        b.value,
        b.value_payed,
        concat(e.idevent, '  ', e.description) as event,
-       case when e.type = 0 then 
-           'SAÌDA'
+       case when e.type = 1 then 
+           'SAÍDA'
        else 
            'ENTRADA'
        end as billing_type,
@@ -63,7 +63,6 @@ select b.idbilling,
    $aux3
    $aux4
    group by b.idbilling";
-  
 	include("connection.php");
 	connect();
 	$aux6 = "";
@@ -92,15 +91,15 @@ select b.idbilling,
 		$state = $r["state"];
 		$phones = $r["phones"];
 		$adresses = $r["adresses"];
-		$aux6 = $aux6 . "<div style='width:600px; height:20px; overflow: hidden; float: left; margin-left: 50px;'>".$r["event"].
-		        "</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["type"].
+		$aux6 = $aux6 . "<div style='float:left; clear:both;'><div style='width:600px; height:20px; overflow: hidden; float: left; margin-left: 50px;'>".$r["event"].
+		        "</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["billing_type"].
 				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value"].
 				"</div> <div style='width:100px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["value_payed"].
 				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["processing_date"].
 				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["payment_date"].
-				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["maturity_date"]."</div><br>";
-		$value_total = $r["value_total"];
-		$value_payed_total = $r["value_payed_total"];
+				"</div> <div style='width:150px; height:20px; overflow: hidden; margin-left: 10px; float: left;'>".$r["maturity_date"]."</div></div><br>";
+		$value_total = $value_total + intval($r["value_total"]);
+		$value_payed_total = $value_payed_total + intval($r["value_payed_total"]);
 	}
 	disconnect();
 	$aux6 = $aux6 . "
@@ -137,6 +136,7 @@ select b.idbilling,
 					&nbsp;$phones<br>
 					&nbsp;$adresses<br>
 				</div>
+				<div style='height: 20px; margin-top:50px; float: left; font-weight: bold; font-size: 30pt;'> Relatório de Contas</div>
 			</div>
 			<div id='body'>
 			    $aux6

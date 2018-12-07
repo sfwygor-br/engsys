@@ -457,4 +457,8 @@
 		
 		return($form);
 	}
+	
+	function curdate(){
+		return date('Y-m-d');
+	}
 ?>
