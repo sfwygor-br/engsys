@@ -51,10 +51,10 @@
 			#$headers = "From: naoresponda@engsys.com" . "\r\n";
 			$email_body = "
    Ola ".$_POST["p1"].", voce acabou de solicitar acesso ao sistema de genrenciamento de projetos ENGSYS.
-   Abaixo estao listados informaçoes importantes sobre a sua conta, para sua segurança, pedimos que ao acessar o sistema pela primeira vez, voce realize a troca de seu nome de usuario e senha.
+   Abaixo estao listadas informacoes importantes sobre a sua conta, para sua seguranca, pedimos que ao acessar o sistema pela primeira vez, voce realize a troca de seu nome de usuario e senha.
 			
-   Usuario:    ".$data["username"]."
-   Senha:      ".$data["password"]."
+      Usuario: ".$data["username"]."
+        Senha: ".$data["password"]."
    Integracao: ".$data["iduser_integ"]."
 
    Att, Equipe ENGSYS.
@@ -73,8 +73,8 @@
 				$mail->SMTPSecure = 'tls';	// SSL REQUERIDO pelo GMail
 				$mail->Host = 'smtp.gmail.com';	// SMTP utilizado
 				$mail->Port = 587;  		// A porta 587 deverá estar aberta em seu servidor
-				$mail->Username = 'feecaragua@gmail.com';
-				$mail->Password = 'Hexadecimal123#';
+				$mail->Username = 'engsys.p.m.s@gmail.com';
+				$mail->Password = 'Senha123#';
 				$mail->SetFrom($de, $de_nome);
 				$mail->Subject = $assunto;
 				$mail->Body = $corpo;
@@ -88,7 +88,7 @@
 				}
 			}
 			
-			smtpmailer($_POST["o1"], "feecaragua@gmail.com", "Equipe Engsys", "ENGSYS - Solicitacao de Uso", $email_body);
+			smtpmailer($_POST["o1"], "engsys.p.m.s@gmail.com", "Equipe Engsys", "ENGSYS - Solicitacao de Uso", $email_body);
 			#mail($_POST["o1"], "ENGSYS - Solicitação de Uso", $email_body, $headers, "naoresponda@engsys.com");
 			
 			
