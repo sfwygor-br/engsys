@@ -93,6 +93,12 @@
 				<p>
 					Projeto: $filter1
 				</p>
+				<p>
+					Pessoa: $filter2
+				</p>
+				<p>
+					Pessoa: $filter3
+				</p>
 				<input type='submit' value='Gerar Relatório' class='button'>
 			</form>
 		</div>
