@@ -55,18 +55,18 @@
 							   initial_date,
 							   final_date,
 							   case 
-							       when status = 0 then
+							       when final_date is null then
 								       'ATIVO'
 								   else
-									   'ABERTO'
+									   'EM EXECUÇÃO'
 							   end status
 						  from project_stage 
 						 where idproject = ".$_GET['idproject'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
-				if (($rs == True) and (mysqli_num_rows($rs) > 0)){
+				if (($rs == True)){
 					$section = $section . build_grid(array("idproject_stage", "description", "initial_date", "final_date", "status"),
 					                                 array("Código", "Descrição", "Data Início", "Data Término", "Status"),													 
-													 array("50", "500", "130", "140", "50"),
+													 array("50", "500", "130", "140", "150"),
 													 $rs,
 													 "./projects.php?action=PROJECTSTAGEUPDATE&idproject=".$_GET['idproject'],
 													 array("idproject_stage", "idproject")
@@ -89,10 +89,10 @@
 				$section = $section . "<div id='new-reg' onclick='location=\"./projects.php?action=OPERATIONINSERT&idproject=".$_GET['idproject']."\"'>Novo</div>";
 				$sql = "select * from operation where idproject = ".$_GET['idproject'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
-				if (($rs == True) and (mysqli_num_rows($rs) > 0)){
-					$section = $section . build_grid(array("idoperation", "idproject", "insert_date", "result"),
-													 array("Código", "", "Data de Inserção", "Resultado"),													 
-													 array("50", "0", "50", "50"),
+				if (($rs == True)){
+					$section = $section . build_grid(array("idoperation", "insert_date", "result"),
+													 array("Código", "Data de Inserção", "Resultado"),													 
+													 array("50", "50", "50"),
 													 $rs,
 													 "./projects.php?action=OPERATIONUPDATE&idproject=".$_GET['idproject'],
 													 array("idoperation", "idproject")
@@ -104,9 +104,9 @@
 		$page = 'project_stage';
 		$x = 'insert';
 		$section = $section . build_form($GLOBALS['fields_name']['project_stage'], 
-									     array("", "", "Descrição", "Data Início Prevista &nbsp;", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva", "Status"), 
-										 array("0", "0", "60", "50", "50", "50", "50", "50"),  
-										 array("hidden", "hidden", "textarea", "date", "date", "date", "date", "status"), 
+									     array("", "", "Descrição", "Data Início Prevista &nbsp;", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva", ""), 
+										 array("0", "0", "60", "50", "50", "50", "50", "0"),  
+										 array("hidden", "hidden", "textarea", "date", "date", "date", "date", "hidden"), 
 										 "./data_process.php", 
 										 "project_stage", 
 										 $x,
@@ -121,9 +121,9 @@
 		$sql = "select * from project_stage where idproject = ".$_GET['idproject'].$_GET['sql_macro'];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		$section = $section . build_form($GLOBALS['fields_name']['project_stage'], 
-									     array("", "", "Descrição", "Data Início Prevista &nbsp;", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva", "Status"), 
-										 array("0", "0", "60", "50", "50", "50", "50", "50"),  
-										 array("hidden", "hidden", "textarea", "date", "date", "date", "date", "status"), 
+									     array("", "", "Descrição", "Data Início Prevista &nbsp;", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva", ""), 
+										 array("0", "0", "60", "50", "50", "50", "50", "0"),  
+										 array("hidden", "hidden", "textarea", "date", "date", "date", "date", "hidden"), 
 										 "./data_process.php", 
 										 "project_stage", 
 										 $x,
@@ -152,7 +152,7 @@
 		$x = 'insert';
 		$section = $section . build_form($GLOBALS['fields_name']['operation'],
 		                                 array("", "", "Data de Inserção", "Resultado"), 									    
-										 array("0", "0", "50", "30"), 
+										 array("0", "0", "250", "30"), 
 										 array("hidden", "hidden", "date", "text"), 
 										 "./data_process.php", 
 										 "operation", 
@@ -169,7 +169,7 @@
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		$section = $section . build_form($GLOBALS['fields_name']['operation'],
 		                                 array("", "", "Data de Inserção", "Resultado"), 									    
-										 array("0", "0", "50", "30"), 
+										 array("0", "0", "250", "30"), 
 										 array("hidden", "hidden", "date", "text"), 
 										 "./data_process.php", 
 										 "operation", 

@@ -79,7 +79,7 @@
 		$page = 'phone';
 		$x = 'insert';
 		$section = $section . build_form($GLOBALS['fields_name']['phone'], 
-									     array("Código", "", "DDD", "Número"), 
+									     array("", "", "DDD", "Número"), 
 										 array("0", "0", "10", "40"), 
 										 array("hidden", "hidden", "Text", "Text"), 
 										 "./data_process.php", 
@@ -96,7 +96,7 @@
 		$sql = "select * from phone where idperson = ".$_GET['idperson'].$_GET['sql_macro'];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		$section = $section . build_form($GLOBALS['fields_name']['phone'], 
-									     array("Código", "", "DDD", "Número"), 
+									     array("", "", "DDD", "Número"), 
 										 array("0", "0", "10", "40"), 
 										 array("hidden", "hidden", "Text", "Text"), 
 										 "./data_process.php", 
@@ -111,13 +111,13 @@
 		$page = 'adress';
 		$x = 'insert';
 		$section = $section . build_form($GLOBALS['fields_name']['adress'],
-		                                 array("Código", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
-										 array("0", "0", "64", "10", "50", "40", "12", "4"), 
+		                                 array("", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
+										 array("0", "0", "50", "10", "30", "40", "12", "4"), 
 										 array("hidden", "hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
 										 "./data_process.php", 
 										 "adress", 
 										 $x,
-										 array("no", "no", "no", "no", "no", "no", "no", "no"),
+										 array("no", "no", "yes", "no", "yes", "yes", "no", "no"),
 										 null,
 										 1,
 										 $_GET["idperson"]
@@ -128,13 +128,13 @@
 		$sql = "select * from adress where idperson = ".$_GET['idperson'].$_GET['sql_macro'];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		$section = $section . build_form($GLOBALS['fields_name']['adress'],
-		                                 array("Código", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
-										 array("0", "0", "64", "10", "50", "40", "12", "4"), 
+		                                 array("", "", "Endereço", "Número", "Bairro", "Cidade", "CEP", "UF"), 									    
+										 array("0", "0", "50", "10", "30", "40", "12", "4"), 
 										 array("hidden", "hidden", "Text", "Text", "Text", "Text", "Text", "Text"), 
 										 "./data_process.php", 
 										 "adress", 
 										 $x,
-										 array("no", "no", "no", "no", "no", "no", "no", "no"),
+										 array("no", "no", "yes", "no", "yes", "yes", "no", "no"),
 										 $rs,
 										 "idperson",
 										 $_GET["idperson"]

@@ -24,7 +24,7 @@
 						$_SESSION["iduser"]       = $res["iduser"];
 						$_SESSION["iduser_integ"] = $res["iduser_integ"];
 						$_SESSION["username"]     = $res["username"];
-						echo "<script> location='./php/dashboard.php?width='+screen.width;</script>";	
+						echo "<script>location='./php/dashboard.php?width='+screen.width</script>";	
 					}else{
 						$status_inactive = "<script>alert('Usuário Inativo: Contate o administrador do sistemma')</script>";
 					}

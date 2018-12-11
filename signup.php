@@ -1,5 +1,6 @@
 ﻿<?php
 	include("./php/connection.php");
+	require_once("./php/mailer/class.phpmailer.php");
 	connect();
 	$result = "";
 	if (!empty($_POST["o1"]) and
@@ -30,8 +31,8 @@
 				$msg = "1: Aviso - Os Parâmetros não foram definidos com sucesso!";
 			}				
 			
-			$sql = "insert into configuration (iduser_integ, notification_period, disponibility, meter_price)
-					                    values('".$id["iduser_integ"]."', '".$_POST["ca1"]."', '".$_POST["ca2"]."', '".$_POST["ca3"]."')";
+			$sql = "insert into configuration (iduser_integ, notification_period, meter_price)
+					                    values('".$id["iduser_integ"]."', '".$_POST["ca1"]."', '".$_POST["ca3"]."')";
 										
 			$rs2 = mysqli_query($GLOBALS["conn"], $sql);
 			
@@ -47,19 +48,48 @@
 			$sql = "select username, password, iduser_integ from user where iduser_integ = ".$id["iduser_integ"];
 			$rs = mysqli_query($GLOBALS["conn"], $sql);
 			$data = mysqli_fetch_assoc($rs);
-			
+			#$headers = "From: naoresponda@engsys.com" . "\r\n";
 			$email_body = "
-			Olá ".$_POST["p1"].", você acabou de solicitar acesso ao sistema de genrenciamento de projetos ENGSYS.
-			Abai estão listados informações importantes sobre a sua conta, para sua segurança, pedimos que ao acessar o sistema pela primeira vez, você realize a troca de seu nome de usuário e senha.
+   Ola ".$_POST["p1"].", voce acabou de solicitar acesso ao sistema de genrenciamento de projetos ENGSYS.
+   Abaixo estao listadas informacoes importantes sobre a sua conta, para sua seguranca, pedimos que ao acessar o sistema pela primeira vez, voce realize a troca de seu nome de usuario e senha.
 			
-			Usuário:    ".$data["username"]."
-			Senha:      ".$data["password"]."
-			Integração: ".$data["iduser_integ"]."
+      Usuario: ".$data["username"]."
+        Senha: ".$data["password"]."
+   Integracao: ".$data["iduser_integ"]."
+
+   Att, Equipe ENGSYS.
+";
 			
-			Att, Equipe ENGSYS.
-			";
+			#define('GUSER', 'feecaragua@gmail.com');	// <-- Insira aqui o seu GMail
+			#define('GPWD', 'Hexadecimal123#');		// <-- Insira aqui a senha do seu GMail
 			
-			mail($_POST["o1"], "ENGSYS - Solicitação de Uso", $email_body, "naoresponda@engsys.com");
+			function smtpmailer($para, $de, $de_nome, $assunto, $corpo) { 
+				global $error;
+				$mail = new PHPMailer();
+				$mail->charSet = "UTF-8";
+				$mail->IsSMTP();		// Ativar SMTP
+				$mail->SMTPDebug = 0;		// Debugar: 1 = erros e mensagens, 2 = mensagens apenas
+				$mail->SMTPAuth = true;		// Autenticação ativada
+				$mail->SMTPSecure = 'tls';	// SSL REQUERIDO pelo GMail
+				$mail->Host = 'smtp.gmail.com';	// SMTP utilizado
+				$mail->Port = 587;  		// A porta 587 deverá estar aberta em seu servidor
+				$mail->Username = 'engsys.p.m.s@gmail.com';
+				$mail->Password = 'Senha123#';
+				$mail->SetFrom($de, $de_nome);
+				$mail->Subject = $assunto;
+				$mail->Body = $corpo;
+				$mail->AddAddress($para);
+				if(!$mail->Send()) {
+					$error = 'Mail error: '.$mail->ErrorInfo; 
+					return false;
+				} else {
+					$error = 'Mensagem enviada!';
+					return true;
+				}
+			}
+			
+			smtpmailer($_POST["o1"], "engsys.p.m.s@gmail.com", "Equipe Engsys", "ENGSYS - Solicitacao de Uso", $email_body);
+			#mail($_POST["o1"], "ENGSYS - Solicitação de Uso", $email_body, $headers, "naoresponda@engsys.com");
 			
 			
 		}else{
@@ -94,7 +124,7 @@
 		$result
 	</body>
 </html>";
-	#ob_end_clean();		
+	ob_end_clean();		
 	disconnect();
 	echo $screen;
 ?>
