@@ -333,9 +333,9 @@ mostreFeedback();	)*/
 					$(this).css('cursor','auto');
 				});
 				
-				$(window).resize(function() {
+				/*$(window).resize(function() {
 					$('body').css('display', 'none');
-				});
+				});*/
 				
 			});
 		</script>

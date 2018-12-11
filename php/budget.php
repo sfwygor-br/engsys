@@ -16,14 +16,18 @@
 		if ($action == 'INSERT'){
 			$page = 'budget';
 			$x = 'insert';
-			$section = $section . build_form($GLOBALS['fields_name']['budget'], 
-											 array("", "Cliente", "Data Início", "Data Término", "Área", "Tempo de Execução", "Grau de Dificuldade %", "Grau de Volatilidade %", "Valor", ""), 
-											 array("0", "1000", "50", "50", "20", "10", "10", "10", "20", "0"),
-											 array("hidden", "person_filter", "date", "date", "text", "text", "text", "text", "text", "hidden"), 
-											 "./data_process.php", 
-											 "budget", 
-											 $x,
-											 array("yes", "yes", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
+			$section = $section . "<fieldset> <b style='font-size: 25pt;'>Cadastrar Orçamento</b><br>" . build_form($GLOBALS['fields_name']['budget'], 
+												 array("", "Cliente", "Data Início", "Data Término", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																									  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Área", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tempo de Execução", "&nbsp;Grau de Dificuldade %", "Grau de Volatilidade %", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																									  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor", ""), 
+												 array("0", "1000", "50", "50", "5", "3", "3", "3", "10", "0"),
+												 array("hidden", "person_filter", "date", "date", "text", "text", "text", "text", "text", "hidden"), 
+												 "./data_process.php", 
+												 "budget", 
+												 $x,
+												 array("yes", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no", "no"),
 											 null,
 											 9,
 											 $_SESSION["iduser_integ"]
@@ -34,14 +38,18 @@
 			$sql = "Select * from budget where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
-				$section = $section . build_form($GLOBALS['fields_name']['budget'], 
-												 array("", "Cliente", "Data Início", "Data Término", "Área", "Tempo de Execução", "Grau de Dificuldade %", "Grau de Volatilidade %", "Valor", ""), 
-												 array("0", "1000", "50", "50", "20", "10", "10", "10", "20", "0"),
+				$section = $section . "<fieldset> <b style='font-size: 25pt;'>Atualizar Orçamento</b><br>" . build_form($GLOBALS['fields_name']['budget'], 
+												 array("", "Cliente", "Data Início", "Data Término", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																									  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Área", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tempo de Execução", "&nbsp;Grau de Dificuldade %", "Grau de Volatilidade %", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												                                                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+																									  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Valor", ""), 
+												 array("0", "1000", "50", "50", "5", "3", "3", "3", "10", "0"),
 												 array("hidden", "person_filter", "date", "date", "text", "text", "text", "text", "text", "hidden"), 
 												 "./data_process.php", 
 												 "budget", 
 												 $x,
-												 array("yes", "yes", "no", "yes", "no", "yes", "no", "yes", "no", "no"),
+												 array("yes", "yes", "no", "yes", "yes", "yes", "yes", "yes", "no", "no"),
 												 $rs,
 												 9,
 												 null
@@ -58,12 +66,12 @@
 				 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
-			$section = $section . build_grid(array("idbudget", "name", "initial_date", "final_date", "value"), 
+			$section = $section. "<fieldset> <b style='font-size: 15pt;'>Orçamentos Cadastrados</b> <br><br><br>" . build_grid(array("idbudget", "name", "initial_date", "final_date", "value"), 
 											 array("Código", "Cliente", "Data Início", "Data Término", "Valor"),			                                
 											 array("100", "300", "130", "140", "100"),
 											 $rs,
 											 "./budget.php?action=UPDATE",
-											 array("idbudget"));
+											 array("idbudget")) . "</fieldset>";
 		}
 	}
 	ob_end_clean();		

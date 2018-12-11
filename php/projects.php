@@ -17,9 +17,9 @@
 		if ($action == 'INSERT'){
 			$page = 'project';
 			$x = 'insert';
-			$section = $section . build_form($GLOBALS['fields_name']['project'], 
+			$section = $section . "<fieldset> <b style='font-size: 25pt;'>Cadastrar Projeto</b><br>" . build_form($GLOBALS['fields_name']['project'], 
 											 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
-											 array("0", "500", "50", "10", "20", "20", "20", "10", "53", "0", "0"), 
+											 array("0", "500", "50", "10", "20", "20", "3", "10", "53", "0", "0"), 
 											 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 											 "./data_process.php",
 											 "project", 
@@ -28,16 +28,16 @@
 											 null,
 											 9,
 											 $_SESSION["iduser_integ"]
-											);
+											)."</fieldset>";
 		}else if ($action == 'UPDATE'){
 			$page = 'project';
 			$x = 'update';
 			$sql = "Select * from project where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){	
-				$section = $section . build_form($GLOBALS['fields_name']['project'], 
+				$section = $section . "<fieldset> <b style='font-size: 25pt;'>Atualizar Projeto</b><br>" . build_form($GLOBALS['fields_name']['project'], 
 												 array("", "Orçamento", "Data Início Prevista", "Data Término Prevista", "Data Início Efetiva &nbsp;", "Data Término Efetiva &nbsp;", "Área", "Total", "Descrição", ""),
-												 array("0", "500", "50", "10", "20", "20", "20", "10", "53", "0", "0"), 
+												 array("0", "500", "50", "10", "20", "20", "3", "10", "53", "0", "0"), 
 												 array("hidden", "budget_filter", "date", "date", "date", "date", "text", "text", "textarea", "hidden"),
 												 "./data_process.php", 
 												 "project", 
@@ -47,7 +47,7 @@
 												 null,
 												 null,
 												 null
-												);
+												)."</fieldset><br>";
 				
 				$section = $section . "<div id='new-reg' onclick='location=\"./projects.php?action=PROJECTSTAGEINSERT&idproject=".$_GET['idproject']."\"'>Novo</div>";
 				$sql = "select idproject_stage,
@@ -194,7 +194,7 @@
 				 
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if (($rs == True) and (mysqli_num_rows($rs) > 0)){	
-			$section = $section . build_grid(array("idproject", "name", "initial_date", "final_date", "value"), 
+			$section = $section . "<fieldset> <b style='font-size: 16pt;'>Projetos Cadastrados</b><br><br><br>" . build_grid(array("idproject", "name", "initial_date", "final_date", "value"), 
 											 array("Código", "Cliente", "Data Início", "Data Término", "Valor"),			                                 
 											 array("50", "500", "130", "140", "100"),
 											 $rs,

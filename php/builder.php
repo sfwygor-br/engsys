@@ -159,7 +159,9 @@
 				$x = $x . "<option value='" . $r["idperson"] . "' $aux>" . $r["name"] . "</option>";
 			}		
             $x = $x . "
-			</select>";			
+			</select>
+			</p>
+			<p>";			
 			return($x);
 		}
 		
@@ -254,7 +256,7 @@
 			if (isset($selected)){
 				$y = " ";
 			};
-			$x = "
+			$x = "Filtro de Orçamentos
 		<select name='$field' class='field' style='width: 100%' $y>";
 		    if (!isset($selected)){
 				$x = $x . "
@@ -277,7 +279,9 @@
 				$x = $x . "<option value='" . $r["idbudget"] . "' $aux>" . $r["description"] . "</option>";
 			}		
             $x = $x . "
-			</select>";			
+			</select>
+			</p>
+			<p>";			
 			return($x);
 		}
 		

@@ -16,7 +16,7 @@
 		if ($action == 'INSERT'){
 			$page = 'person';
 			$x = 'insert';
-			$section = $section . build_form($GLOBALS['fields_name']['person'], 
+			$section =  $section . "<fieldset> <b style='font-size: 16pt;'>Pessoas Cadastradas</b><br><br><br>" . build_form($GLOBALS['fields_name']['person'], 
 											 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "E-mail", "", "Cadastro", ""), 
 											 array("0", "50", "0", "10", "20", "30", "50", "10", "20", "20"), 
 											 array("hidden", "Text", "hidden", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
@@ -150,7 +150,7 @@
 				  from person where iduser_integ = " . $_SESSION["iduser_integ"];
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
-			$section = $section . build_grid(array("idperson", "name", "c_provider"), 
+			$section =  $section . "<fieldset> <b style='font-size: 16pt;'>Pessoas Cadastradas</b><br><br><br>" . build_grid(array("idperson", "name", "c_provider"), 
 											 array("Código", "Nome", "Prestador"),			                                 
 											 array("50", "500", "50"),
 											 $rs,
