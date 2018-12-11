@@ -98,7 +98,7 @@
 		};
 		
 		function status($field, $selected){
-				$x = "
+				$x = "Situação
 		<select name='$field' class='field'>";
 			if ($selected == '0'){
 				$x = $x."
@@ -191,7 +191,9 @@
 				$x = $x . "<option value='" . $r["idperson"] . "' $aux>" . $r["name"] . "</option>";
 			}		
             $x = $x . "
-			</select>";			
+			</select>
+			</p>
+			<p>";			
 			return($x);
 		}
 		
@@ -219,7 +221,9 @@
 				$x = $x . "<option value='" . $r["idevent"] . "' $aux>" . $r["description"] . "</option>";
 			}		
             $x = $x . "
-			</select>";			
+			</select>
+			</p>
+			<p>";			
 			return($x);
 		}
 		
@@ -247,7 +251,9 @@
 				$x = $x . "<option value='" . $r["idproject"] . "' $aux>" . $r["description"] . "</option>";
 			}		
             $x = $x . "
-			</select>";			
+			</select>
+			</p>
+			<p>";			
 			return($x);
 		}
 		
@@ -286,8 +292,8 @@
 		}
 		
 		function billing_type($field, $selected, $size){
-			$x = "
-		<select name='$field' class='field' style='width: $size;'>";
+			$x = "&nbsp;Natureza
+		<select name='$field' class='field' >";
 			if ($selected == '0'){
 				$x = $x."
 			<option value='0' selected> Entrada </option>
@@ -329,7 +335,8 @@
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					if ($field_type[$pos] =="provider_type"){
-						$form = $form . "Prestador ";
+						$form = $form . "&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;Prestador ";
 					};
 					$form = $form . yesno($fields_name[$pos], '1');
 					$pos = $pos + 1;					
@@ -385,7 +392,8 @@
 					$pos = $pos + 1;					
 				}else if (($field_type[$pos] =="provider_type") or ($field_type[$pos] =="yesno")){
 					if ($field_type[$pos] =="provider_type"){
-						$form = $form . "Prestador ";
+						$form = $form . "&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;Prestador ";
 					};
 					$form = $form . yesno($fields_name[$pos], $r[$fields_name[$pos]]);
 					$pos = $pos + 1;					

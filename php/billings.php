@@ -18,9 +18,9 @@
 			$sql = "Select * from billing where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
-				$section = $section . build_form($GLOBALS['fields_name']['billing'], 
+				$section = $section . "<fieldset> <b style='font-size: 16pt;'>Contas Cadastradas</b><br>" . build_form($GLOBALS['fields_name']['billing'], 
 												 array("", "", "", "", "", "", "", "", "Data de Pagamento", "Valor Pago"),
-											     array("0", "0", "0", "0", "0", "0", "0", "0", "50", "20"),
+											     array("0", "0", "0", "0", "0", "0", "0", "0", "5", "20"),
 											     array("hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "hidden", "date", "text"), 
 											     "./data_process.php", 
 												 "billings_update", 
@@ -34,36 +34,36 @@
 		}else if ($action == 'INSERT'){
 			#$page = 'billing';
 			$x = 'insert';
-			$section = $section . build_form($GLOBALS['fields_name']['billing'], 
-											 array("", "", "idevent", "idperson", "idproject", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
-											 array("0", "0", "1000", "1000", "1000", "50", "50", "20", "50", "50"),
-											 array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "date", "date", "text", "hidden", "hidden"), 
-											 "./data_process.php", 
-											 "billing", 
-											 $x,
-											 array("yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "yes", "yes"),
+			$section = $section . "<fieldset> <b style='font-size: 25pt;'>Cadastrar Conta</b><br><br><br>" . build_form($GLOBALS['fields_name']['billing'], 
+												 array("", "", "idevent", "idperson", "idproject", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
+											     array("0", "0", "1000", "1000", "1000", "0", "50", "5", "5", "5", "5"),
+											     array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "date", "date", "text", "hidden", "hidden"), 
+											     "./data_process.php", 
+												 "billing", 
+												 $x,
+												 array("yes", "yes", "yes", "yes", "yes", "no", "yes", "yes", "yes", "no"),
 											 null,
 											 1,
 											 $_SESSION["iduser_integ"]
-											);
+											)."</fieldset>";
 		}else if ($action == 'UPDATE'){
 			#$page = 'billing';
 			$x = 'update';
 			$sql = "Select * from billing where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
-				$section = $section . build_form($GLOBALS['fields_name']['billing'], 
+				$section = $section . "<fieldset> <b style='font-size: 25pt;'>Atualizar Conta</b><br><br><br>" . build_form($GLOBALS['fields_name']['billing'], 
 												 array("", "", "idevent", "idperson", "idproject", "Data de Processamento", "Data de Vencimento", "Valor", "", ""),
-											     array("0", "0", "1000", "1000", "1000", "0", "50", "50", "20", "50", "50"),
+											     array("0", "0", "1000", "1000", "1000", "0", "50", "5", "5", "5", "5"),
 											     array("hidden", "hidden", "event_filter", "person_provider", "project_filter", "date", "date", "text", "hidden", "hidden"), 
 											     "./data_process.php", 
 												 "billing", 
 												 $x,
-												 array("yes", "yes", "yes", "yes", "yes", "yes", "yes", "no", "yes", "no"),
+												 array("yes", "yes", "yes", "yes", "yes", "no", "yes", "yes", "yes", "no"),
 												 $rs,
 												 null,
 												 null
-												);																							  
+												)."</fieldset>";																							  
 			};
 		};
 	}else{
@@ -81,7 +81,7 @@
 				   and e.idevent = b.idevent";
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
-			$section = $section . build_grid(array("idbilling", "description", "type"), 
+			$section = $section . "<fieldset> <b style='font-size: 16pt;'>Contas Cadastradas</b><br><br><br>" . build_grid(array("idbilling", "description", "type"), 
 											 array("Código", "Descrição", "Natureza"),			                                
 											 array("50", "500", "", "20"),
 											 $rs,

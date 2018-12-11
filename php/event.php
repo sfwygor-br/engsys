@@ -16,7 +16,7 @@
 		if ($action == 'INSERT'){
 			$page = 'event';
 			$x = 'insert';
-			$section = $section . build_form($GLOBALS['fields_name']['event'], 
+			$section = $section . "<fieldset> <b style='font-size: 25pt;'>Cadastrar Evento</b><br><br><br>" . build_form($GLOBALS['fields_name']['event'], 
 											 array("", "", "Descrição", "Natureza"), 
 											 array("0", "0", "50", "200"),
 											 array("hidden", "hidden", "text", "billing_type"), 
@@ -27,14 +27,14 @@
 											 null,
 											 1,
 											 $_SESSION["iduser_integ"]
-											);
+											)."</fieldset>";
 		}else if ($action == 'UPDATE'){
 			$page = 'event';
 			$x = 'update';
 			$sql = "Select * from event where iduser_integ = ".$_SESSION['iduser_integ']. $_GET['sql_macro'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){
-				$section = $section . build_form($GLOBALS['fields_name']['event'], 
+				$section = $section . "<fieldset> <b style='font-size: 25pt;'>Atualizar Evento</b><br><br><br>" . build_form($GLOBALS['fields_name']['event'], 
 												 array("", "", "Descrição", "Natureza"), 
 												 array("0", "0", "50", "200"),
 												 array("hidden", "hidden", "text", "billing_type"), 
@@ -45,7 +45,7 @@
 												 $rs,
 												 null,
 												 null
-												);																							  
+												)."</fieldset>";																							  
 			};
 		};
 	}else{
@@ -61,12 +61,12 @@
 				 where iduser_integ = " . $_SESSION["iduser_integ"] . "";
 		$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		if ($rs == True){	
-			$section = $section . build_grid(array("idevent", "description", "type"), 
+			$section = $section . "<fieldset> <b style='font-size: 16pt;'>Eventos Cadastrados</b><br><br><br>" . build_grid(array("idevent", "description", "type"), 
 											 array("Código", "Descrição", "Natureza"),			                                
 											 array("50", "500", "", "20"),
 											 $rs,
 											 "./event.php?action=UPDATE",
-											 array("idevent"));
+											 array("idevent"))."</fieldset><br>";
 		}
 	}
 	ob_end_clean();		

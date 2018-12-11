@@ -16,7 +16,7 @@
 		if ($action == 'INSERT'){
 			$page = 'person';
 			$x = 'insert';
-			$section =  $section . "<fieldset> <b style='font-size: 16pt;'>Pessoas Cadastradas</b><br><br><br>" . build_form($GLOBALS['fields_name']['person'], 
+			$section =  $section . "<fieldset> <b style='font-size: 25pt;'>Cadastrar Pessoa</b><br><br><br>" . build_form($GLOBALS['fields_name']['person'], 
 											 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "E-mail", "", "Cadastro", ""), 
 											 array("0", "50", "0", "10", "20", "30", "50", "10", "20", "20"), 
 											 array("hidden", "Text", "hidden", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
@@ -27,16 +27,17 @@
 											 null,
 											 8,
 											 $_SESSION["iduser_integ"]
-											);
+											)."</fieldset><br>";
 		}else if ($action == 'UPDATE'){
 			$page = 'person';
 			$x = 'update';
 			$sql = "Select * from person where idperson = ".$_GET['idperson'];
 			$rs  = mysqli_query($GLOBALS["conn"], $sql);
 		    if ($rs == True){	
-				$section = $section . build_form($GLOBALS['fields_name']['person'], 
-												 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "E-mail", "", "Cadastro", ""), 
-												 array("0", "50", "0", "10", "20", "30", "50", "10", "20", "20"), 
+				$section = $section . "<fieldset> <b style='font-size: 25pt;'>Atualizar Pessoa</b><br><br><br>" . build_form($GLOBALS['fields_name']['person'], 
+												 array("", "Nome/Fantasia", "", "F/J", "CPF/CNPJ", "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;E-mail", "", "Cadastro", ""), 
+												 array("0", "50", "0", "10", "13", "30", "50", "10", "20", "20"), 
 												 array("hidden", "Text", "hidden", "person_type", "Text", "email", "provider_type", "date", "hidden"), 
 												 "./data_process.php", 
 												 "person", 
@@ -46,32 +47,32 @@
 												 null,
 												 null,
 												 null
-												);
+												)."</fieldset><br>";
 				
 				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=PHONEINSERT&idperson=".$_GET['idperson']."\"'>Novo</div>";
 				$sql = "select * from phone where idperson = ".$_GET['idperson'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
 				if ($rs == True){
-					$section = $section . build_grid(array("idphone", "idperson", "ddd", "number"),
-					                                 array("Código", "", "DDD", "Número"),													 
-													 array("50", "0", "50", "100"),
+					$section = $section . "<fieldset> <b style='font-size: 16pt;'>Telefones Cadastrados</b><br>" . build_grid(array("idphone", "ddd", "number"),
+					                                 array("Código", "DDD", "Número"),													 
+													 array("50", "50", "100"),
 													 $rs,
 													 "./person.php?action=PHONEUPDATE",
 													 array("idphone", "idperson")
-													);
+													)."</fieldset><br>";
 				};
 				
 				$section = $section . "<div id='new-reg' onclick='location=\"./person.php?action=ADRESSINSERT&idperson=".$_GET['idperson']."\"'>Novo</div>";
 				$sql = "select * from adress where idperson = ".$_GET['idperson'];
 				$rs  = mysqli_query($GLOBALS["conn"], $sql);
 				if ($rs == True){
-					$section = $section . build_grid(array("idadress", "idperson", "adress", "number", "neighborhood", "city", "state"),
-													 array("Código", "", "Endereço", "Número", "Bairro", "Cidade", "UF"),													 
-													 array("50", "0", "400", "50", "200", "200", "10"),
+					$section = $section . "<fieldset> <b style='font-size: 16pt;'>Endereços Cadastrados</b><br>" . build_grid(array("idadress", "adress", "number", "neighborhood", "city", "state"),
+													 array("Código", "Endereço", "Número", "Bairro", "Cidade", "UF"),													 
+													 array("50", "400", "50", "200", "200", "10"),
 													 $rs,
 													 "./person.php?action=ADRESSUPDATE",
 													 array("idadress", "idperson")
-													);
+													)."</fieldset><br>";
 				};
 			};
 		};									
