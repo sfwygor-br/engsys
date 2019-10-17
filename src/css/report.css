@@ -1,0 +1,81 @@
+﻿#main{
+	width: 90%;
+	height: 145px;
+	margin: 0px auto;
+	border: solid 1px;
+	height: inherited;
+}
+
+#header{
+	font-size: 16pt;
+}
+
+.title{
+	color: black;
+	font-weight: bold;
+}
+
+#engineer-data{
+	width: 200px;
+	float: left;
+	text-align: right;
+	clear:both;
+	z-index: 1;
+}
+
+#engineer-data-rs{
+	width: 40%;
+	float: left;
+	text-align: left;
+	z-index: 2;
+}
+
+#body{
+	width: 100%;
+	float: left;
+	clear: both;
+	min-height: 500px;
+	border: solid 1px;
+}
+
+#billing-filter-container{
+	width: 750px;
+	display: none;
+}
+
+#billing-filter-container-header{
+	width: 750px;
+	height: 50px;
+	background-color: #3a4858;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+}
+
+#operation-filter-container{
+	width: 750px;
+	display: none;
+}
+
+#operation-filter-container-header{
+	width: 750px;
+	height: 50px;
+	background-color: #3a4858;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+}
+
+#ps-filter-container{
+	width: 750px;
+	display: none;
+}
+
+#ps-filter-container-header{
+	width: 750px;
+	height: 50px;
+	background-color: #3a4858;
+	line-height: 50px;
+	color: white;
+	font-weight: bold;
+}
